@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.1
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-05 22:08
+// @version      2025-01-05 22:18
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
@@ -304,6 +304,8 @@ message = "statut 404 : " + localStorage.getItem("Email"+localStorage.getItem("T
 
 else if (response.status === 403) {
 
+setTimeout(function () { window.location.href = window.location.href; }, 1000e3);
+    
     function ERROR403() {
 (async function handleUrlRequest() {
     const URL_1 = "https://fr.tlscontact.com/oauth2/authorization/oidc";
@@ -333,19 +335,19 @@ else if (response.status === 403) {
 })();
     }
 
-localStorage.setItem("input403", parseInt(localStorage.getItem("input403")) + parseInt(1));
-const input403 = localStorage.getItem("input403");
+localStorage.setItem("inputi403", parseInt(localStorage.getItem("inputi403")) + parseInt(1));
+const inputi403 = localStorage.getItem("inputi403");
 const disconnect403 = 3;
-    if (localStorage.getItem("input403") === null || parseInt(localStorage.getItem("input403")) < disconnect403) {
-        localStorage.setItem("input403", 1);
+    if (localStorage.getItem("inputi403") === null || parseInt(localStorage.getItem("inputi403")) < disconnect403) {
+        localStorage.setItem("inputi403", 1);
         document.getElementById("MOTIF").textContent = "votre table statut : " + response.status;
         console.error("statut : " + response.status);
         setTimeout(function(){ Gettable(); },50e3);
         //setTimeout(function(){ ERROR403(); },50e3);
         tt = Math.floor(Math.random() * 10);
 
-    } else if (parseInt(localStorage.getItem("input403")) > disconnect403) {
-                localStorage.setItem("input403", 0);
+    } else if (parseInt(localStorage.getItem("inputi403")) > disconnect403) {
+                localStorage.setItem("inputi403", 0);
         document.getElementById("MOTIF").textContent = "votre table statut : " + response.status + " blocked ";
         console.error("statut : " + response.status);
         message = "statut 403 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer");
