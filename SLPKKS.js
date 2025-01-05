@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.1
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-05 21:20
+// @version      2025-01-05 22:08
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
-// @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants. 
+// @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
 
 var CL = 15 ;
@@ -1076,7 +1076,9 @@ if (document.body.innerText.includes('Veuillez remplir votre formulaire de deman
     clearInterval(set);
 var emailX = localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"));
 var pwdX = localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));
-var content = emailX + "\n" + pwdX;
+var member = localStorage.getItem("membre"+localStorage.getItem("TLS_WEB_issuer"));
+var content = emailX + "\n" + pwdX + "\n" + member;
+
 document.getElementById("EMAIL").textContent = content;
 document.getElementById("EMAIL").style.whiteSpace = "pre-line";
 document.getElementById("EMAIL").style.textAlign = "left";
@@ -1310,7 +1312,7 @@ applyCodeToSubmit();
 setTimeout(() => {
 
     var errormessage = "⚠️⚠️⚠️⚠️⚠️⚠️ Formulaire_OFF" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) ;
-    var errormessage2 = "⚠️ Remplissage Individuel Automatique : " + "\n⚠️ A verfifier Ou confirmer" + "\n⚠️  Email : " + emailloc + "\n⚠️ Center : " + window.location.pathname.split("/")[3] + "\n⚠️ MOTIF : " + localStorage.getItem("f_trav_purpose"+localStorage.getItem("TLS_WEB_issuer")) ;
+    var errormessage2 = "⚠️ Remplissage Individuel Automatique : " + "\n⚠️ A verfifier Ou confirmer" + "\n⚠️  Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))  + "\n⚠️ Center : " + window.location.pathname.split("/")[3] + "\n⚠️ MOTIF : " + localStorage.getItem("f_trav_purpose"+localStorage.getItem("TLS_WEB_issuer")) ;
 
 if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Casa2000@' ) {
 
