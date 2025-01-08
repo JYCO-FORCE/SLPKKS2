@@ -2131,10 +2131,11 @@ fetch('https://api.ipify.org?format=json')
 }, 1000);
 
 
-// Fonction pour réserver un rendez-vous
 
 // Fonction pour réserver un rendez-vous
 
+// Fonction pour réserver un rendez-vous
+
   // Créer le bouton
   // Créer le bouton
   // Créer le bouton
@@ -2142,6 +2143,7 @@ fetch('https://api.ipify.org?format=json')
   // Créer le bouton
 
 
+ // Créer le bouton
 var bookButton = document.createElement("button");
 bookButton.id = "bookButton";
 bookButton.innerText = "Book Appointment";
@@ -2178,32 +2180,19 @@ var f_xcopy_ug_type1 = localStorage.getItem("f_xcopy_ug_type"+localStorage.getIt
         }
 
         function sendBookingRequest(token) {
-       fetch(`https://fr.tlscontact.com/services/customerservice/api/tls/appointment/book?client=fr&issuer=$maCAS2fr&formGroupId=${ref}&timeslot=${date}%20$14:00&appointmentType=${fiAppointmentType}&accountType=INDI&lang=fr-fr`, {
+            const formData = {};
 
-  method: "POST",
-  headers: {
-        "accept": "application/json, text/plain, */*",
-        "accept-language": "en-US,en;q=0.9,de;q=0.8",
-        "priority": "u=1, i",
-        "recaptcha-token": token,
-        "sec-ch-ua": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
-        "sec-ch-ua-arch": "\"x86\"",
-        "sec-ch-ua-bitness": "\"64\"",
-        "sec-ch-ua-full-version": "\"131.0.6778.140\"",
-        "sec-ch-ua-full-version-list": "\"Google Chrome\";v=\"131.0.6778.140\", \"Chromium\";v=\"131.0.6778.140\", \"Not_A Brand\";v=\"24.0.0.0\"",
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-model": "\"\"",
-        "sec-ch-ua-platform": "\"Windows\"",
-        "sec-ch-ua-platform-version": "\"15.0.0\"",
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-origin",
-        "x-xsrf-token": cookieValue,
-  },
-  referrer: "https://fr.tlscontact.com/appointment/"+country+"/"+center+"/"+ref
-
-})
-.then(response => {
+            fetch(`https://fr.tlscontact.com/services/customerservice/api/tls/appointment/book?client=fr&issuer=${center}&formGroupId=${ref}&timeslot=${date}%20${time}&appointmentType=${fiAppointmentType}&accountType=INDI&lang=fr-fr`, {
+                method: "POST",
+                headers: {
+  "Content-Type": "application/json", // Ensures proper content type
+  "Accept": "application/json, text/plain, */*",
+                    "recaptcha-token": token,
+                    "x-xsrf-token": cookieValue,
+                },
+                referrer: `https://fr.tlscontact.com/appointment/${country}/${center}/${ref}`,
+            })
+            .then(response => {
                 if (response.status === 200) {
                     return response.json().then(result => {
                         if (result.message === "book appointment success") {
@@ -2224,7 +2213,7 @@ var f_xcopy_ug_type1 = localStorage.getItem("f_xcopy_ug_type"+localStorage.getIt
                     // Retry the booking request with a new token
                     getRecaptchaToken()
                         .then(newToken => {
-                            sendBookingRequest(newToken);
+                           // sendBookingRequest(newToken);
                         })
                         .catch(error => {
                             console.error("Error getting reCAPTCHA token:", error);
@@ -2260,8 +2249,8 @@ var f_xcopy_ug_type1 = localStorage.getItem("f_xcopy_ug_type"+localStorage.getIt
     // Ajoutez cette fonction pour le bouton
     document.getElementById("bookButton").addEventListener("click", function() {
         // Remplacez ces valeurs par les valeurs souhaitées
-        const date = '2023-12-31';
-        const time = '14:00';
+        const date = '2025-01-17';
+        const time = '10:00';
         bookAppointment(date, time);
     });
 }
