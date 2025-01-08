@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.1
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-05 22:18
+// @version      2025-01-08 14:49
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
@@ -1041,6 +1041,22 @@ setTimeout(function(){   window.location.href = "https://fr.tlscontact.com/perso
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 
 let home = setInterval(() => { if ( window.location.pathname.split("/")[4] == 'home' ) {
+    
+  if (window.location.search.includes('switch')) {
+
+const logoutElement = document.querySelector('.tls-navbar--slot a.tls-link-uppercase');
+
+            if (logoutElement) {
+                // Simuler un clic pour déclencher la déconnexion
+                logoutElement.click();
+            } else {
+                console.error('The logout element was not found on the page.');
+            }
+        
+    }
+    
+    else {
+
 //revoir
 localStorage.setItem("403ERROR", 0);
   const element = document.querySelector('a.tls-button-link');
@@ -1048,6 +1064,7 @@ localStorage.setItem("403ERROR", 0);
  setTimeout(function(){  element.click(); clearInterval(home);   }, 1000);
 }
   }
+}
  }, 1000);
 
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
@@ -1697,6 +1714,54 @@ if (fiAppointmentType2.includes("PRIMO") || fiAppointmentType2.includes("primo")
   console.log("null");
 }
 
+      setTimeout(function(){
+   // Écouter les messages Firebase pour synchroniser les actions
+    firebase.database().ref("RegionSwitch").on("value", (snapshot) => {
+        const data = snapshot.val(); // Récupérer les données de Firebase
+        if (!data) return; // Si aucune donnée, ne rien faire
+
+        // Récupérer les clés des messages
+        const keys = Object.keys(data);
+        // Récupérer le dernier message
+        const lastMessage = data[keys[keys.length - 1]];
+
+        if (!lastMessage) return; // Si aucun message valide, ne rien faire
+
+        // Obtenir le temps actuel
+        const currentTime = new Date().getTime();
+        // Convertir le temps du dernier message en millisecondes
+        const lastMessageTime = lastMessage.timo;
+        // Calculer la différence de temps en secondes
+        const timeDifferenceSeconds = (currentTime - lastMessageTime) / 1000;
+
+        // Si le message est trop ancien (plus de 30 secondes), l'ignorer
+        if (timeDifferenceSeconds >= 30) {
+            console.log("Message expiré, aucune action requise.");
+            return;
+        }
+
+        console.log("Message reçu :", lastMessage.text);
+
+        // Déterminer la région cible à partir du message
+        const targetRegion = lastMessage.text.split(" ")[2]; // Extrait "maCAS2fr" ou "maOUD2fr"
+        console.log(targetRegion);
+
+        // Vérifier si la région actuelle correspond à la région cible
+        if (targetRegion && targetRegion !== currentRegion) {
+            console.log(`Action : switch vers ${targetRegion}`);
+            
+                            // Ajouter un délai avant de rediriger
+                setTimeout(() => {
+                    // Effectuer le switch en modifiant l'URL
+                    const newUrl = `https://fr.tlscontact.com/visa/ma/${targetRegion}/home?switch`;
+                    console.log('Redirection vers :', newUrl);
+                    window.location = newUrl;
+                }, 5000); // Délai de 2 secondes pour laisser le temps à la déconnexion            
+        } else {
+            console.log("Aucun switch nécessaire (même région ou message invalide).");
+        }
+    });          
+      },5e3);
     setTimeout(function(){
 firebase.database().ref(typo2).on('value', function(snapshot) {
 var DateValue = snapshot.val();
