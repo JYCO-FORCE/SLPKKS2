@@ -1761,6 +1761,75 @@ if (fiAppointmentType2.includes("PRIMO") || fiAppointmentType2.includes("primo")
             console.log("Aucun switch nécessaire (même région ou message invalide).");
         }
     });          
+
+           // Détecter la région actuelle à partir de l'URL
+const currentRegion = window.location.pathname.split("/")[3]; // Ex : maCAS2fr ou maOUD2fr
+
+// Fonction pour envoyer un message via Firebase
+function sendMessage(targetRegion) {
+    const currentTime = new Date().getTime();
+    const message = {
+        text: `Switch to ${targetRegion}`,
+        time: `${new Date().getUTCHours()} : ${new Date().getUTCMinutes()} : ${new Date().getUTCSeconds()}`,
+        timo: currentTime
+    };
+    firebase.database().ref("RegionSwitch").push().set(message)
+        .then(() => console.log("Message sent successfully"))
+        .catch(error => console.error("Error sending message:", error));
+}
+
+// Ajouter les boutons dans le DOM
+(function() {
+    // Créer un conteneur pour les boutons
+    const buttonContainer = document.createElement("div");
+    buttonContainer.style.position = "fixed";
+    buttonContainer.style.bottom = "10px";
+    buttonContainer.style.right = "10px";
+    buttonContainer.style.zIndex = "1000";
+    buttonContainer.style.display = "flex";
+    buttonContainer.style.gap = "10px";
+
+    // Créer le bouton pour Oujda
+    const buttonOujda = document.createElement("button");
+    buttonOujda.textContent = "Oujda";
+    buttonOujda.style.padding = "10px 20px";
+    buttonOujda.style.cursor = "pointer";
+    buttonOujda.style.backgroundColor = "#2196F3"; // Bleu
+    buttonOujda.style.color = "white";
+    buttonOujda.style.border = "none";
+    buttonOujda.style.borderRadius = "5px";
+    buttonOujda.style.fontSize = "14px";
+
+    // Créer le bouton pour Casablanca
+    const buttonCasablanca = document.createElement("button");
+    buttonCasablanca.textContent = "Casablanca";
+    buttonCasablanca.style.padding = "10px 20px";
+    buttonCasablanca.style.cursor = "pointer";
+    buttonCasablanca.style.backgroundColor = "#2196F3"; // Bleu
+    buttonCasablanca.style.color = "white";
+    buttonCasablanca.style.border = "none";
+    buttonCasablanca.style.borderRadius = "5px";
+    buttonCasablanca.style.fontSize = "14px";
+
+    // Ajouter les boutons au conteneur
+    buttonContainer.appendChild(buttonOujda);
+    buttonContainer.appendChild(buttonCasablanca);
+
+    // Ajouter le conteneur à la page
+    document.body.appendChild(buttonContainer);
+
+    // Ajouter les événements pour les boutons
+    buttonOujda.addEventListener("click", () => {
+        console.log("Switching to Oujda...");
+        sendMessage("maOUD2fr");
+    });
+
+    buttonCasablanca.addEventListener("click", () => {
+        console.log("Switching to Casablanca...");
+        sendMessage("maCAS2fr");
+    });
+})();
+
       },5e3);
     setTimeout(function(){
 firebase.database().ref(typo2).on('value', function(snapshot) {
