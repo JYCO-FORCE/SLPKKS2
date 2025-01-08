@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.1
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-08 14:49
+// @version      2025-01-08 22:49
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
@@ -9,7 +9,7 @@
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
 
-var CL = 15 ;
+var CL = 6 ;
 
 if((document.body.innerText).indexOf('This XML file does not appear to have any style information associated with it. The document tree is shown below.') > -1){ setTimeout(function(){ location.reload(); document.body.style.backgroundColor = "#FFA500"; }, 60e3); };
 if((document.body.innerText).indexOf('You have tried to log in too many times. For security reasons, you are blocked. Please re-connect later.') > -1){       setTimeout(function(){ window.location = "https://ps.w.org/limit-login-attempts-reloaded/assets/banner-1544x500.png?rev=2954981"; }, 60e3);   }
@@ -1464,7 +1464,13 @@ setTimeout(function() {
 }, 2000);
 document.querySelector("#kc-login").on("click", function() {
 });
-}setTimeout(function(){ Real(); }, 1000);}
+}
+ if((document.body.innerText).indexOf('Invalid username or password.') > -1){ setTimeout(function(){ document.body.style.backgroundColor = "#FFA500"; }, 2000); }
+else  {   
+    setTimeout(function(){ Real(); }, 1000);
+}
+
+}
 
 
 if ( window.location.pathname.split("/")[1] == 'login' ) {
@@ -1713,55 +1719,8 @@ if (fiAppointmentType2.includes("PRIMO") || fiAppointmentType2.includes("primo")
   typo2 = fiAppointmentType2.replace(/\s/g, "") + window.location.pathname.split("/")[3];
   console.log("null");
 }
-
-      setTimeout(function(){
-   // Écouter les messages Firebase pour synchroniser les actions
-    firebase.database().ref("RegionSwitch").on("value", (snapshot) => {
-        const data = snapshot.val(); // Récupérer les données de Firebase
-        if (!data) return; // Si aucune donnée, ne rien faire
-
-        // Récupérer les clés des messages
-        const keys = Object.keys(data);
-        // Récupérer le dernier message
-        const lastMessage = data[keys[keys.length - 1]];
-
-        if (!lastMessage) return; // Si aucun message valide, ne rien faire
-
-        // Obtenir le temps actuel
-        const currentTime = new Date().getTime();
-        // Convertir le temps du dernier message en millisecondes
-        const lastMessageTime = lastMessage.timo;
-        // Calculer la différence de temps en secondes
-        const timeDifferenceSeconds = (currentTime - lastMessageTime) / 1000;
-
-        // Si le message est trop ancien (plus de 30 secondes), l'ignorer
-        if (timeDifferenceSeconds >= 30) {
-            console.log("Message expiré, aucune action requise.");
-            return;
-        }
-
-        console.log("Message reçu :", lastMessage.text);
-
-        // Déterminer la région cible à partir du message
-        const targetRegion = lastMessage.text.split(" ")[2]; // Extrait "maCAS2fr" ou "maOUD2fr"
-        console.log(targetRegion);
-
-        // Vérifier si la région actuelle correspond à la région cible
-        if (targetRegion && targetRegion !== currentRegion) {
-            console.log(`Action : switch vers ${targetRegion}`);
-            
-                            // Ajouter un délai avant de rediriger
-                setTimeout(() => {
-                    // Effectuer le switch en modifiant l'URL
-                    const newUrl = `https://fr.tlscontact.com/visa/ma/${targetRegion}/home?switch`;
-                    console.log('Redirection vers :', newUrl);
-                    window.location = newUrl;
-                }, 5000); // Délai de 2 secondes pour laisser le temps à la déconnexion            
-        } else {
-            console.log("Aucun switch nécessaire (même région ou message invalide).");
-        }
-    });          
-
+setTimeout(function(){
+          
            // Détecter la région actuelle à partir de l'URL
 const currentRegion = window.location.pathname.split("/")[3]; // Ex : maCAS2fr ou maOUD2fr
 
@@ -1829,6 +1788,56 @@ function sendMessage(targetRegion) {
         sendMessage("maCAS2fr");
     });
 })();
+      },1e3);
+      
+      ////////////////////////////////////////////////////////////////////////
+      setTimeout(function(){
+   // Écouter les messages Firebase pour synchroniser les actions
+    firebase.database().ref("RegionSwitch").on("value", (snapshot) => {
+        const data = snapshot.val(); // Récupérer les données de Firebase
+        if (!data) return; // Si aucune donnée, ne rien faire
+
+        // Récupérer les clés des messages
+        const keys = Object.keys(data);
+        // Récupérer le dernier message
+        const lastMessage = data[keys[keys.length - 1]];
+
+        if (!lastMessage) return; // Si aucun message valide, ne rien faire
+
+        // Obtenir le temps actuel
+        const currentTime = new Date().getTime();
+        // Convertir le temps du dernier message en millisecondes
+        const lastMessageTime = lastMessage.timo;
+        // Calculer la différence de temps en secondes
+        const timeDifferenceSeconds = (currentTime - lastMessageTime) / 1000;
+
+        // Si le message est trop ancien (plus de 30 secondes), l'ignorer
+        if (timeDifferenceSeconds >= 30) {
+            console.log("Message expiré, aucune action requise.");
+            return;
+        }
+
+        console.log("Message reçu :", lastMessage.text);
+
+        // Déterminer la région cible à partir du message
+        const targetRegion = lastMessage.text.split(" ")[2]; // Extrait "maCAS2fr" ou "maOUD2fr"
+        console.log(targetRegion);
+
+        // Vérifier si la région actuelle correspond à la région cible
+        if (targetRegion && targetRegion !== currentRegion) {
+            console.log(`Action : switch vers ${targetRegion}`);
+            
+                            // Ajouter un délai avant de rediriger
+                setTimeout(() => {
+                    // Effectuer le switch en modifiant l'URL
+                    const newUrl = `https://fr.tlscontact.com/visa/ma/${targetRegion}/home?switch`;
+                    console.log('Redirection vers :', newUrl);
+                    window.location = newUrl;
+                }, 5000); // Délai de 2 secondes pour laisser le temps à la déconnexion            
+        } else {
+            console.log("Aucun switch nécessaire (même région ou message invalide).");
+        }
+    });          
 
       },5e3);
     setTimeout(function(){
@@ -2284,7 +2293,7 @@ else if ( window.location.pathname.split("/")[1] == 'appointment' ) {
   // Créer le bouton
   // Créer le bouton
 
-
+setTimeout(function(){
  // Créer le bouton
 var bookButton = document.createElement("button");
 bookButton.id = "bookButton";
@@ -2396,7 +2405,9 @@ var f_xcopy_ug_type1 = localStorage.getItem("f_xcopy_ug_type"+localStorage.getIt
         bookAppointment(date, time);
     });
 }
-
+}, 1000);
+    
+    
 // Clear local storage if the URL ends with 'home'
 if (window.location.pathname.split("/")[4] === 'home') {
     localStorage.removeItem('bookingError');
@@ -2406,6 +2417,7 @@ if (window.location.pathname.split("/")[4] === 'home') {
 else {
  // setTimeout(function(){ window.location.href =  "https://blsspainvisa.com" }, 10e3);
 }
+
 
 
   //setTimeout(function(){ window.location.href =  "https://blsspainmorocco.com/" }, 5e3);
