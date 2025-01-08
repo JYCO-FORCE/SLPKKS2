@@ -2123,7 +2123,15 @@ fetch('https://api.ipify.org?format=json')
   .then(response => response.json())
   .then(data => {
     const ipAddress = data.ip;
-    console.log('Your IP address is: ' + ipAddress); document.title = ipAddress
+       if ( window.location.pathname.split("/")[1] == 'personal' ) {
+    console.log('Your IP address is: ' + ipAddress); setTimeout(function(){ document.title = ipAddress + " " + 'personal' }, 10000);
+}
+else if ( window.location.pathname.split("/")[1] == 'appointment' ) {
+    console.log('Your IP address is: ' + ipAddress); setTimeout(function(){ document.title = ipAddress + " " + 'appointment' }, 10000);
+}
+       else {
+    console.log('Your IP address is: ' + ipAddress); setTimeout(function(){ document.title = ipAddress }, 10000);
+       }
   })
   .catch(error => {
     console.error('Error fetching IP address:', error);
