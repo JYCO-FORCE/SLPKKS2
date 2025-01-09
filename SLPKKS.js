@@ -8,9 +8,10 @@
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1 2025-01-09 14:19";
+var version = "V1.1.1 2025-01-09 14:53";
 
 var CLP ;
+
 var cas1 = 15;
 var cas2 = 1;
 var cas3 = 15;
@@ -410,7 +411,7 @@ console.log(newUrl);
 
             const totalCount = Object.values(availableDatesAndHours).flat().length ;
 
-            //if (totalCount > CLP ) {
+            //if (totalCount > CLPI ) {
             if (Object.keys(availableDatesAndHours).length > 0) {
         var dateText = `${Object.keys(availableDatesAndHours).join('\n')}`;
     const dateText2 = Object.entries(availableDatesAndHours).map(([date, hours]) => hours.map(hour => `${date} ${hour}`).join('\n')).join('\n');
