@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.1
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-09 14:19
+// @version      2025-01-09 23:19
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1.1 2025-01-09 14:53";
+var version = "V1.1 2025-01-09 23:19";
 
 var CLP ;
 
@@ -308,7 +308,7 @@ message = "statut 404 : " + localStorage.getItem("Email"+localStorage.getItem("T
             ////////// ESPACE 403 /////////////                     ////////// ESPACE 403 /////////////                ////////// ESPACE 403 /////////////
             ////////// ESPACE 403 /////////////                     ////////// ESPACE 403 /////////////                ////////// ESPACE 403 /////////////
 
-else if (response.status === 403) {
+else if (response.status === 403) { localStorage.setItem("inputi403", 1);
 
 setTimeout(function () { window.location.href = window.location.href; }, 1000e3);
     
@@ -341,14 +341,13 @@ setTimeout(function () { window.location.href = window.location.href; }, 1000e3)
 })();
     }
 
-localStorage.setItem("inputi403", parseInt(localStorage.getItem("inputi403")) + parseInt(1));
 const inputi403 = localStorage.getItem("inputi403");
 const disconnect403 = 3;
     if (localStorage.getItem("inputi403") === null || parseInt(localStorage.getItem("inputi403")) < disconnect403) {
-        localStorage.setItem("inputi403", 1);
+        localStorage.setItem("inputi403", parseInt(localStorage.getItem("inputi403")) + parseInt(1));
         document.getElementById("MOTIF").textContent = "votre table statut : " + response.status;
         console.error("statut : " + response.status);
-        setTimeout(function(){ Gettable(); },50e3);
+        setTimeout(function(){ Gettable(); },60e3);
         //setTimeout(function(){ ERROR403(); },50e3);
         tt = Math.floor(Math.random() * 10);
 
@@ -1415,15 +1414,13 @@ const newElement = Object.assign(document.createElement('div'), {
     textContent: "",
     id: "MOTIFO"
 });
-document.body.appendChild(newElement);
+//document.body.appendChild(newElement);
 if ( document.querySelectorAll('.tls-popup').length > 0 ) {  document.querySelector('.tls-button-primary.-uppercase').click(); clearInterval(auto_refresh);   }
 
  }, 1000);
 }
 
 if ( window.location.pathname.split("/")[1] == "appointment" ) {
-
-            document.getElementById("MOTIF").textContent = "Appointement has been sent Successfuly";
 
         const intervalId = setInterval(function () {
         var element = document.querySelectorAll(".tls-simple-text-banner, .tls-news-banner, .tls-footer, .vld-overlay.is-active.is-full-page, .tls-simple-banner-small, .tls-status-card-info.small-card.tls-padding-bottom-no");
