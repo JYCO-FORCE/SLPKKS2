@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.1
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-08 22:49
+// @version      2025-01-09 14:16
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
@@ -9,7 +9,11 @@
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
 
-var CL = 6 ;
+var CLP ;
+var cas1 = 15;
+var cas2 = 1;
+var cas3 = 15;
+var cas4 = 1;
 
 if((document.body.innerText).indexOf('This XML file does not appear to have any style information associated with it. The document tree is shown below.') > -1){ setTimeout(function(){ location.reload(); document.body.style.backgroundColor = "#FFA500"; }, 60e3); };
 if((document.body.innerText).indexOf('You have tried to log in too many times. For security reasons, you are blocked. Please re-connect later.') > -1){       setTimeout(function(){ window.location = "https://ps.w.org/limit-login-attempts-reloaded/assets/banner-1544x500.png?rev=2954981"; }, 60e3);   }
@@ -405,7 +409,7 @@ console.log(newUrl);
 
             const totalCount = Object.values(availableDatesAndHours).flat().length ;
 
-            if (totalCount > CL ) {
+            //if (totalCount > CLP ) {
             if (Object.keys(availableDatesAndHours).length > 0) {
         var dateText = `${Object.keys(availableDatesAndHours).join('\n')}`;
     const dateText2 = Object.entries(availableDatesAndHours).map(([date, hours]) => hours.map(hour => `${date} ${hour}`).join('\n')).join('\n');
@@ -430,17 +434,17 @@ var s ;
 
                     if (fiAppointmentType2 && typeof fiAppointmentType2 === "string") {
 
-if (fiAppointmentType2.includes("PRIMO") || fiAppointmentType2.includes("primo") || fiAppointmentType2.includes("Primo") || fiAppointmentType2.includes("privee") ) { s = 9;
+if (fiAppointmentType2.includes("PRIMO") || fiAppointmentType2.includes("primo") || fiAppointmentType2.includes("Primo") || fiAppointmentType2.includes("privee") ) { s = 9; CLP = cas1;
   typo2 = "PRIMO" + window.location.pathname.split("/")[3];
-} else if (fiAppointmentType2.includes("VISE") || fiAppointmentType2.includes("vise") || fiAppointmentType2.includes("Vise") || fiAppointmentType2.includes("visé")) { s = 18;
+} else if (fiAppointmentType2.includes("VISE") || fiAppointmentType2.includes("vise") || fiAppointmentType2.includes("Vise") || fiAppointmentType2.includes("visé")) { s = 18; CLP = cas2;
   typo2 = "VISE" + window.location.pathname.split("/")[3];
-} else if (fiAppointmentType2.includes("Renouvellement") || fiAppointmentType2.includes("renouvellement") || fiAppointmentType2.includes("RENOUVELLEMENT")) {
+} else if (fiAppointmentType2.includes("Renouvellement") || fiAppointmentType2.includes("renouvellement") || fiAppointmentType2.includes("RENOUVELLEMENT")) { CLP = cas2;
   typo2 = "VISE" + window.location.pathname.split("/")[3];
-} else if (fiAppointmentType2.includes("CIRCULATION") || fiAppointmentType2.includes("circulation") || fiAppointmentType2.includes("Circulation")) {
+} else if (fiAppointmentType2.includes("CIRCULATION") || fiAppointmentType2.includes("circulation") || fiAppointmentType2.includes("Circulation")) { CLP = cas3;
   typo2 = "CIRCULATION" + window.location.pathname.split("/")[3];  s = 18;
 } else if (fiAppointmentType2.includes("Long Sejour") || fiAppointmentType2.includes("long sejour")) {
   typo2 = "Longsejour"; s = 0;
-} else {  s = 0;
+} else {  s = 0; CLP = cas4;
   typo2 = fiAppointmentType2.replace(/\s/g, "") + window.location.pathname.split("/")[3];
   console.log("null");
 }
@@ -450,7 +454,7 @@ const messagex = dateText2
 const timex = hours + " : " + minutes + " : " + seconds
 const timo = new Date().getTime();
 
-                    if (hoursCount > 15 )  {
+                    if (hoursCount > CLP )  {
     var databaseRef = firebase.database().ref(typo2);
     databaseRef.push().set({
       text: messagex ,
@@ -830,7 +834,7 @@ saveButtons.forEach(button => {
                     }
                }
 }}else {    }
-                }}
+                }//}
             else {
 
 ////////// ESPACE RELOAD /////////////                     ////////// ESPACE RELOAD /////////////                ////////// ESPACE RELOAD /////////////
