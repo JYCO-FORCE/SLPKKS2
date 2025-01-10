@@ -127,9 +127,9 @@ var url429 = 'https://fr.tlscontact.com/personal/' + window.location.pathname.sp
 setTimeout(function(){ window.location.href =  window.location  }, 20e3);
                 }
             } else if (response.status === 403) {
-                if (localStorage.getItem("FORMS429") == 3) { }
+                if (localStorage.getItem("FORMS429") == 3) { document.title = "403 DETECTED" }
                 else {
-                setTimeout(function(){ checkStatus(urlToCheck) }, 200e3);
+                setTimeout(function(){ checkStatus(urlToCheck) }, 80e3);
                 console.log(`Forbidden: ${response.status} at ${new Date().toLocaleTimeString()}`);
 setTimeout(function(){ window.location.href =  window.location  }, 20e3);
                 }
@@ -181,7 +181,7 @@ ERROR();
             else
         if (response.status === 403) {  console.error("statut : " + response.status); document.getElementById("MOTIF").textContent = "votre forms statut : " + response.status;
 if ( window.location.pathname.split("/")[1] == 'inquiry' ) {  window.location.href = "https://fr.tlscontact.com/personal/"+ window.location.pathname.split("/")[2] + "/" + window.location.pathname.split("/")[3] + "/" + localStorage.getItem("TLS_WEB_formGroupId");  }
-else { setTimeout(function(){ location.reload(); },100e3); }
+else { setTimeout(function(){ document.title = "403 DETECTED" },70e3); }
                                      }
             else
         if (response.status === 401) {  console.error("statut : " + response.status); document.getElementById("MOTIF").textContent = "votre forms statut : " + response.status;
@@ -347,11 +347,11 @@ const disconnect403 = 3;
         localStorage.setItem("inputi403", parseInt(localStorage.getItem("inputi403")) + parseInt(1));
         document.getElementById("MOTIF").textContent = "votre table statut : " + response.status;
         console.error("statut : " + response.status);
-        setTimeout(function(){ Gettable(); },60e3);
+        setTimeout(function(){ /*Gettable();*/ document.title = "403 DETECTED" },60e3);
         //setTimeout(function(){ ERROR403(); },50e3);
         tt = Math.floor(Math.random() * 10);
 
-    } else if (parseInt(localStorage.getItem("inputi403")) > disconnect403) {
+    } else if (parseInt(localStorage.getItem("inputi403")) > disconnect403) {  
                 localStorage.setItem("inputi403", 0);
         document.getElementById("MOTIF").textContent = "votre table statut : " + response.status + " blocked ";
         console.error("statut : " + response.status);
