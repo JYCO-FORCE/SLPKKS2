@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.1
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-09 23:19
+// @version      2025-01-10 13:53
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1 2025-01-09 23:19";
+var version = "V1.1 2025-01-10 13:54";
 
 var CLP ;
 
@@ -311,7 +311,7 @@ message = "statut 404 : " + localStorage.getItem("Email"+localStorage.getItem("T
 else if (response.status === 403) { localStorage.setItem("inputi403", 1);
 
 setTimeout(function () { window.location.href = window.location.href; }, 1000e3);
-    
+
     function ERROR403() {
 (async function handleUrlRequest() {
     const URL_1 = "https://fr.tlscontact.com/oauth2/authorization/oidc";
@@ -1046,7 +1046,7 @@ setTimeout(function(){   window.location.href = "https://fr.tlscontact.com/perso
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 
 let home = setInterval(() => { if ( window.location.pathname.split("/")[4] == 'home' ) {
-    
+
   if (window.location.search.includes('switch')) {
 
 const logoutElement = document.querySelector('.tls-navbar--slot a.tls-link-uppercase');
@@ -1057,9 +1057,9 @@ const logoutElement = document.querySelector('.tls-navbar--slot a.tls-link-upper
             } else {
                 console.error('The logout element was not found on the page.');
             }
-        
+
     }
-    
+
     else {
 
 //revoir
@@ -1403,6 +1403,8 @@ window.location.href = "https://fr.tlscontact.com/not-found";
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 
 if ( window.location.pathname.split("/")[1] == 'personal' , "appointment" ) {
+               // Détecter la région actuelle à partir de l'URL
+const currentRegion = window.location.pathname.split("/")[3]; // Ex : maCAS2fr ou maOUD2fr
     localStorage.setItem("juridictions", window.location.pathname.split("/")[3] );
 var auto_refresh = setInterval(function (){
 var elements = document.querySelectorAll(".tls-simple-text-banner, .tls-news-banner, .tls-footer, .vld-overlay.is-active.is-full-page, .tls-simple-banner-small, .tls-status-card-info.small-card.tls-padding-bottom-no");
@@ -1421,6 +1423,9 @@ if ( document.querySelectorAll('.tls-popup').length > 0 ) {  document.querySelec
 }
 
 if ( window.location.pathname.split("/")[1] == "appointment" ) {
+
+            // Détecter la région actuelle à partir de l'URL
+const currentRegion = window.location.pathname.split("/")[3]; // Ex : maCAS2fr ou maOUD2fr
 
         const intervalId = setInterval(function () {
         var element = document.querySelectorAll(".tls-simple-text-banner, .tls-news-banner, .tls-footer, .vld-overlay.is-active.is-full-page, .tls-simple-banner-small, .tls-status-card-info.small-card.tls-padding-bottom-no");
@@ -1471,7 +1476,7 @@ document.querySelector("#kc-login").on("click", function() {
 });
 }
  if((document.body.innerText).indexOf('Invalid username or password.') > -1){ setTimeout(function(){ document.body.style.backgroundColor = "#FFA500"; }, 2000); }
-else  {   
+else  {
     setTimeout(function(){ Real(); }, 1000);
 }
 
@@ -1725,9 +1730,6 @@ if (fiAppointmentType2.includes("PRIMO") || fiAppointmentType2.includes("primo")
   console.log("null");
 }
 setTimeout(function(){
-          
-           // Détecter la région actuelle à partir de l'URL
-const currentRegion = window.location.pathname.split("/")[3]; // Ex : maCAS2fr ou maOUD2fr
 
 // Fonction pour envoyer un message via Firebase
 function sendMessage(targetRegion) {
@@ -1794,7 +1796,7 @@ function sendMessage(targetRegion) {
     });
 })();
       },1e3);
-      
+
       ////////////////////////////////////////////////////////////////////////
       setTimeout(function(){
    // Écouter les messages Firebase pour synchroniser les actions
@@ -1831,18 +1833,18 @@ function sendMessage(targetRegion) {
         // Vérifier si la région actuelle correspond à la région cible
         if (targetRegion && targetRegion !== currentRegion) {
             console.log(`Action : switch vers ${targetRegion}`);
-            
+
                             // Ajouter un délai avant de rediriger
                 setTimeout(() => {
                     // Effectuer le switch en modifiant l'URL
                     const newUrl = `https://fr.tlscontact.com/visa/ma/${targetRegion}/home?switch`;
                     console.log('Redirection vers :', newUrl);
                     window.location = newUrl;
-                }, 5000); // Délai de 2 secondes pour laisser le temps à la déconnexion            
+                }, 5000); // Délai de 2 secondes pour laisser le temps à la déconnexion
         } else {
             console.log("Aucun switch nécessaire (même région ou message invalide).");
         }
-    });          
+    });
 
       },5e3);
     setTimeout(function(){
@@ -2412,8 +2414,8 @@ var f_xcopy_ug_type1 = localStorage.getItem("f_xcopy_ug_type"+localStorage.getIt
     });
 }
 }, 1000);
-    
-    
+
+
 // Clear local storage if the URL ends with 'home'
 if (window.location.pathname.split("/")[4] === 'home') {
     localStorage.removeItem('bookingError');
