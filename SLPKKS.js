@@ -13,7 +13,7 @@ var version = "V1.1 2025-01-10 13:54";
 var CLP ;
 
 var cas1 = 15;
-var cas2 = 1;
+var cas2 = 15;
 var cas3 = 15;
 var cas4 = 1;
 
@@ -600,7 +600,7 @@ let previousIndex = -1; // initialize previousIndex to an invalid value
 let randomIndex = Math.floor(Math.random() * removedButtons.length);
 while (randomIndex === previousIndex) {  randomIndex = Math.floor(Math.random() * removedButtons.length);}
 previousIndex = randomIndex;
-    const randomButton = removedButtons[randomIndex];
+    const randomButton = removedButtons[randomIndex];      
  setTimeout(function(){   randomButton.click(); },1e3);
 }  else { setTimeout(function(){ window.location.href = window.location },5e3); }
 }, 1000); },1e3); },1e3); }
@@ -616,14 +616,14 @@ const element = document.querySelector('#MOTIF');element.style.backgroundColor =
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify({chat_id: '-1001932938808', text: call, parse_mode: 'html'}));
 
-      if (removedButtons.length > 5) {
+      if (removedButtons.length > 15) {
 consecutiveErrors++;
  setTimeout(function(){ location.reload(); },120e3);
 let previousIndex = -1;
 let randomIndex = Math.floor(Math.random() * removedButtons.length);
 while (randomIndex === previousIndex) {  randomIndex = Math.floor(Math.random() * removedButtons.length);}
-previousIndex = randomIndex;    const randomButton = removedButtons[randomIndex];
-//setTimeout(function(){  randomButton.click(); },1e3);
+previousIndex = randomIndex;    const randomButton = removedButtons[randomIndex];  const randomButton2 = removedButtons[Math.floor(Math.random() * removedButtons.length)];
+setTimeout(function(){  randomButton2.click(); },1e3);
 }  else {
   consecutiveErrors++;
 setTimeout(function(){window.location.href = "https://fr.tlscontact.com/personal/"+ window.location.pathname.split("/")[2] + "/" + window.location.pathname.split("/")[3] + "/" + localStorage.getItem("TLS_WEB_formGroupId");   },80e3);
@@ -631,8 +631,8 @@ setTimeout(function(){window.location.href = "https://fr.tlscontact.com/personal
 let previousIndex = -1;
 let randomIndex = Math.floor(Math.random() * removedButtons.length);
 while (randomIndex === previousIndex) {  randomIndex = Math.floor(Math.random() * removedButtons.length);}
-previousIndex = randomIndex;    const randomButton = removedButtons[randomIndex];
-//setTimeout(function(){  randomButton.click(); },3e3);
+previousIndex = randomIndex;    const randomButton = removedButtons[randomIndex];   const randomButton2 = removedButtons[Math.floor(Math.random() * removedButtons.length)];
+setTimeout(function(){  randomButton.click(); },1e3);
  }
                                      }
 
@@ -1403,8 +1403,7 @@ window.location.href = "https://fr.tlscontact.com/not-found";
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 
 if ( window.location.pathname.split("/")[1] == 'personal' , "appointment" ) {
-               // Détecter la région actuelle à partir de l'URL
-const currentRegion = window.location.pathname.split("/")[3]; // Ex : maCAS2fr ou maOUD2fr
+
     localStorage.setItem("juridictions", window.location.pathname.split("/")[3] );
 var auto_refresh = setInterval(function (){
 var elements = document.querySelectorAll(".tls-simple-text-banner, .tls-news-banner, .tls-footer, .vld-overlay.is-active.is-full-page, .tls-simple-banner-small, .tls-status-card-info.small-card.tls-padding-bottom-no");
@@ -1423,10 +1422,6 @@ if ( document.querySelectorAll('.tls-popup').length > 0 ) {  document.querySelec
 }
 
 if ( window.location.pathname.split("/")[1] == "appointment" ) {
-
-            // Détecter la région actuelle à partir de l'URL
-const currentRegion = window.location.pathname.split("/")[3]; // Ex : maCAS2fr ou maOUD2fr
-
         const intervalId = setInterval(function () {
         var element = document.querySelectorAll(".tls-simple-text-banner, .tls-news-banner, .tls-footer, .vld-overlay.is-active.is-full-page, .tls-simple-banner-small, .tls-status-card-info.small-card.tls-padding-bottom-no");
         if (element) {
@@ -1831,7 +1826,7 @@ function sendMessage(targetRegion) {
         console.log(targetRegion);
 
         // Vérifier si la région actuelle correspond à la région cible
-        if (targetRegion && targetRegion !== currentRegion) {
+        if (targetRegion && targetRegion !== window.location.pathname.split("/")[3]) {
             console.log(`Action : switch vers ${targetRegion}`);
 
                             // Ajouter un délai avant de rediriger
@@ -2031,15 +2026,15 @@ const element = document.querySelector('#MOTIF');element.style.backgroundColor =
 
  setTimeout(function(){ location.reload(); },120e3);
 
-      if (removedButtons.length > 3) {
+      if (removedButtons.length > 15) {
 consecutiveErrors++;
  setTimeout(function(){ location.reload(); },120e3);
 let previousIndex = -1; // initialize previousIndex to an invalid value
 let randomIndex = Math.floor(Math.random() * removedButtons.length);
 while (randomIndex === previousIndex) {  randomIndex = Math.floor(Math.random() * removedButtons.length);}
-previousIndex = randomIndex;    const randomButton = removedButtons[randomIndex];
-setTimeout(function(){  randomButton.click(); },2e3);
-}
+previousIndex = randomIndex;    const randomButton = removedButtons[randomIndex];  const randomButton2 = removedButtons[Math.floor(Math.random() * removedButtons.length)];
+setTimeout(function(){  randomButton2.click(); },1e3);
+}  
             else {
   consecutiveErrors++;
  setTimeout(function(){ location.reload();  },80e3);
