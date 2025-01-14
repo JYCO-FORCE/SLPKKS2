@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.1
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-12 22:24
+// @version      2025-01-14 02:24
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1 2025-01-12 22:24";
+var version = "V1.1 2025-01-14 02:24";
 
 var CLP ;
 
@@ -195,9 +195,11 @@ setTimeout(function () { window.location.href = window.location.href;  }, 10e3);
                     else
 if (response.status === 500) {
 
-let url = window.location.href;
-let newUrl = url.replace("appointment", "personal");
-console.log(newUrl);
+setTimeout(function () { window.location.href = window.location.href;  }, 80e3);
+    
+//let url = window.location.href;
+//let newUrl = url.replace("appointment", "personal");
+//console.log(newUrl);
 }
 
         return response.json();
@@ -379,11 +381,14 @@ setTimeout(function () { window.location.href = window.location.href; }, 1e3);
             else
 
    if (response.status === 500) {
-            let url = window.location.href;
-let newUrl = url.replace("appointment", "personal");
-console.log(newUrl);
+       
+       setTimeout(function () { window.location.href = window.location.href;  }, 80e3);
 
-  setTimeout(function () {   window.location.href = newUrl  },150e3);
+//let url = window.location.href;
+//let newUrl = url.replace("appointment", "personal");
+//console.log(newUrl);
+
+ // setTimeout(function () {   window.location.href = newUrl  },150e3);
    }
             else
         if (response.status === 503) {   console.error("votre table statut : " + response.status); document.getElementById("MOTIF").textContent = "table statut : " + response.status; setTimeout(function(){ Gettable(); },1e3); }
