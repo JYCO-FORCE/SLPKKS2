@@ -1,21 +1,46 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.1
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-14 02:24
+// @version      2025-01-15 12:44
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1 2025-01-14 02:24";
+var version = "V1.1 2025-01-15 12:44";
 
 var CLP ;
 
-var cas1 = 15;
-var cas2 = 15;
-var cas3 = 15;
-var cas4 = 1;
+//var cas1 = 15; var cas2 = 15; var cas3 = 15; var cas4 = 1;
+setTimeout(function(){
+
+const fiAppointmentType2 = localStorage.getItem("fiAppointmentType"+localStorage.getItem("TLS_WEB_issuer"));
+var typo2 = "";
+
+if (fiAppointmentType2 && typeof fiAppointmentType2 === "string") {
+
+if (fiAppointmentType2.includes("PRIMO") || fiAppointmentType2.includes("primo") || fiAppointmentType2.includes("Primo") || fiAppointmentType2.includes("privee") ) { // CLP = cas1;
+  typo2 = "PRIMO" + window.location.pathname.split("/")[3]; 
+  if (window.location.pathname.split("/")[3] === "maCAS2fr" ) {  CLP = 7; } else if (window.location.pathname.split("/")[3] === "maOUD2fr" ) { CLP = 15;  } else {  CLP = 10;  }
+} else if (fiAppointmentType2.includes("VISE") || fiAppointmentType2.includes("vise") || fiAppointmentType2.includes("Vise") || fiAppointmentType2.includes("visé")) { // CLP = cas2;
+  typo2 = "VISE" + window.location.pathname.split("/")[3];
+  if (window.location.pathname.split("/")[3] === "maCAS2fr" ) {  CLP = 15;  } else if (window.location.pathname.split("/")[3] === "maOUD2fr" ) { CLP = 15;  } else {  CLP = 15;  }  
+} else if (fiAppointmentType2.includes("Renouvellement") || fiAppointmentType2.includes("renouvellement") || fiAppointmentType2.includes("RENOUVELLEMENT")) {  // CLP = cas2;
+  typo2 = "VISE" + window.location.pathname.split("/")[3];
+  if (window.location.pathname.split("/")[3] === "maCAS2fr" ) {  CLP = 15;  } else if (window.location.pathname.split("/")[3] === "maOUD2fr" ) { CLP = 15;  } else {  CLP = 15;  }    
+} else if (fiAppointmentType2.includes("CIRCULATION") || fiAppointmentType2.includes("circulation") || fiAppointmentType2.includes("Circulation")) { // CLP = cas3;
+  typo2 = "CIRCULATION" + window.location.pathname.split("/")[3]; 
+  if (window.location.pathname.split("/")[3] === "maCAS2fr" ) {  CLP = 20;  } else if (window.location.pathname.split("/")[3] === "maOUD2fr" ) { CLP = 20;  } else {  CLP = 20;  }                                                                                                                                                      
+} else if (fiAppointmentType2.includes("Long Sejour") || fiAppointmentType2.includes("long sejour")) {
+  typo2 = "Longsejour"; 
+} else {   if (window.location.pathname.split("/")[3] === "maCAS2fr" ) {  CLP = 15;  } else if (window.location.pathname.split("/")[3] === "maOUD2fr" ) { CLP = 15;  } else {  CLP = 15;  }  
+  typo2 = fiAppointmentType2.replace(/\s/g, "") + window.location.pathname.split("/")[3];
+  console.log("null");
+}
+    console.log(CLP);
+                    }
+ }, 2000);
 
 if((document.body.innerText).indexOf('This XML file does not appear to have any style information associated with it. The document tree is shown below.') > -1){ setTimeout(function(){ location.reload(); document.body.style.backgroundColor = "#FFA500"; }, 60e3); };
 if((document.body.innerText).indexOf('You have tried to log in too many times. For security reasons, you are blocked. Please re-connect later.') > -1){       setTimeout(function(){ window.location = "https://ps.w.org/limit-login-attempts-reloaded/assets/banner-1544x500.png?rev=2954981"; }, 60e3);   }
@@ -382,7 +407,7 @@ setTimeout(function () { window.location.href = window.location.href; }, 1e3);
 
    if (response.status === 500) {
        
-       setTimeout(function () { window.location.href = window.location.href;  }, 80e3);
+       setTimeout(function () { window.location.href = window.location.href;  }, 30e3);
 
 //let url = window.location.href;
 //let newUrl = url.replace("appointment", "personal");
@@ -1436,6 +1461,13 @@ if ( window.location.pathname.split("/")[1] == "appointment" ) {
     }, 7000);
 
 
+        setTimeout(function(){
+const motifElement = document.getElementById("MOTIF");
+if (motifElement && motifElement.textContent.trim() === "") {
+    console.log("The element is empty!");
+window.location.href = window.location ;
+}
+}, 80e3);
 
 
 
