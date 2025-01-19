@@ -113,8 +113,11 @@ if((document.body.innerText).indexOf('404 - Not Found') > -1){ setTimeout(functi
 if ( (document.body.innerText).indexOf('over-freshening') > -1 ) {
 setTimeout(function(){ window.location = "https://ps.w.org/limit-login-attempts-reloaded/assets/banner-1544x500.png?rev=2954981"; }, 5e3);
 message = "TLSContact over-freshening" + "\n" +     localStorage.getItem("IP"); ERROR(); }
-else if ( (document.body.innerText).indexOf('You have been temporarily blocked') > -1 ) {
-setTimeout(function(){ window.location = "https://ps.w.org/limit-login-attempts-reloaded/assets/banner-1544x500.png?rev=2954981"; }, 6e3);
+else if (
+    (document.body.innerText).indexOf('You have been temporarily blocked') > -1 &&
+    window.location.href.indexOf('403') === -1
+) {
+    setTimeout(function(){ window.location = "https://ps.w.org/limit-login-attempts-reloaded/assets/banner-1544x500.png?rev=2954981"; }, 6e3);
 message = "You have been temporarily blocked" + "\n" +     localStorage.getItem("IP");
 ERROR();}
 
@@ -212,7 +215,7 @@ else { setTimeout(function(){ document.title = "403 DETECTED" },70e3); }
             else
         if (response.status === 401) {  console.error("statut : " + response.status); document.getElementById("MOTIF").textContent = "votre forms statut : " + response.status;
 
-                                      setTimeout(function(){
+           setTimeout(function(){
 setTimeout(function () { window.location.href = window.location.href;  }, 10e3);
                                                            },10e3); }
             else
@@ -231,6 +234,8 @@ setTimeout(function () { window.location.href = window.location.href;  }, 80e3);
         return response.json();
     })
     .then(data => {
+        const fIdCount = data.length;
+        console.log(fIdCount); // Output: 3
         const values = data[0];
         const fVisaType = values.f_visa_type;
         const fTravPurpose = values.f_trav_purpose;
@@ -269,7 +274,7 @@ setTimeout(function () { window.location.href = window.location.href;  }, 80e3);
         }
                 ///////////////////////////////////////////////////////////////////////////////////////////
 
-
+        localStorage.setItem("membre"+localStorage.getItem("TLS_WEB_issuer"), fIdCount);
         localStorage.setItem("fiAppointmentType"+localStorage.getItem("TLS_WEB_issuer"), fiAppointmentType);
         localStorage.setItem("f_xcopy_ug_type"+localStorage.getItem("TLS_WEB_issuer"), f_xcopy_ug_type);
         localStorage.setItem("f_trav_purpose"+localStorage.getItem("TLS_WEB_issuer"), fTravPurpose );
@@ -465,15 +470,16 @@ var typo2 = "";
 var s ;
 
                     if (fiAppointmentType2 && typeof fiAppointmentType2 === "string") {
-
+    var membre =  localStorage.getItem("membre"+localStorage.getItem("TLS_WEB_issuer"));
+if ( membre  > 1 ) { var t = "F" } else { t = "I" }
 if (fiAppointmentType2.includes("PRIMO") || fiAppointmentType2.includes("primo") || fiAppointmentType2.includes("Primo") || fiAppointmentType2.includes("privee") ) { s = 9; CLP = cas1;
-  typo2 = "PRIMO" + window.location.pathname.split("/")[3];
+  typo2 = "PRIMO" + t + window.location.pathname.split("/")[3];  console.log(typo2);
 } else if (fiAppointmentType2.includes("VISE") || fiAppointmentType2.includes("vise") || fiAppointmentType2.includes("Vise") || fiAppointmentType2.includes("visé")) { s = 18; CLP = cas2;
-  typo2 = "VISE" + window.location.pathname.split("/")[3];
+  typo2 = "VISE" + t + window.location.pathname.split("/")[3]; console.log(typo2);
 } else if (fiAppointmentType2.includes("Renouvellement") || fiAppointmentType2.includes("renouvellement") || fiAppointmentType2.includes("RENOUVELLEMENT")) { CLP = cas2;
-  typo2 = "VISE" + window.location.pathname.split("/")[3];
+  typo2 = "VISE" + t + window.location.pathname.split("/")[3]; console.log(typo2);
 } else if (fiAppointmentType2.includes("CIRCULATION") || fiAppointmentType2.includes("circulation") || fiAppointmentType2.includes("Circulation")) { CLP = cas3;
-  typo2 = "CIRCULATION" + window.location.pathname.split("/")[3];  s = 18;
+  typo2 = "CIRCULATION" + t + window.location.pathname.split("/")[3];  s = 18; console.log(typo2);
 } else if (fiAppointmentType2.includes("Long Sejour") || fiAppointmentType2.includes("long sejour")) {
   typo2 = "Longsejour"; s = 0;
 } else {  s = 0; CLP = cas4;
@@ -486,6 +492,7 @@ const messagex = dateText2
 const timex = hours + " : " + minutes + " : " + seconds
 const timo = new Date().getTime();
 
+          if (Object.keys(availableDatesAndHours).length > 3) {
                     if (hoursCount > CLP )  {
     var databaseRef = firebase.database().ref(typo2);
     databaseRef.push().set({
@@ -501,8 +508,7 @@ const timo = new Date().getTime();
       console.error('Error saving message:', error);
     });
                     }
-
-
+}
   const saver = document.querySelectorAll('button#save.tls-button-link');
   if (saver.length > 0) {  console.log("already exists");  }
                         else {
@@ -601,9 +607,21 @@ fetch(`https://fr.tlscontact.com/services/customerservice/api/tls/appointment/bo
                          setTimeout(function () {  window.location.href = window.location.href; }, 10e3);
                                      }
                 else
-        if (response.status === 400 && consecutiveErrors < 2) {  console.error("statut : " + response.status); document.getElementById("MOTIF").textContent = "votre BOOK statut : reload " + response.status;
-                         setTimeout(function () {  window.location.href = window.location.href; }, 100e3);
-                                     }
+if (response.status === 400) {consecutiveErrors++;
+if (consecutiveErrors >= 2) {console.error("Too many consecutive errors (2). Stopping execution.");return; }
+response.text().then(errorText => {
+console.error("Statut : " + response.status + " - " + errorText);
+document.getElementById("MOTIF").textContent = "Votre Book statut : " + response.status + " - " + errorText;
+setTimeout(function () { const intervalIdBut = setInterval(() => {const removedButtons = document.querySelectorAll('.tls-button-link');
+if (removedButtons.length > 1) {clearInterval(intervalIdBut);
+let previousIndex = -1; let randomIndex = Math.floor(Math.random() * removedButtons.length);
+while (randomIndex === previousIndex) {  randomIndex = Math.floor(Math.random() * removedButtons.length);}
+previousIndex = randomIndex;
+const randomButton = removedButtons[randomIndex];                    
+setTimeout(function () {  randomButton.click(); }, 1e3);} else { 
+setTimeout(function () { window.location.href = window.location.href; }, 100e3); 
+                }}, 1000); }, 1e3);
+    }).catch(err => console.error("Error reading response text:", err));}
             else
         if (response.status === 500) {
      document.getElementById("MOTIF").textContent = "votre book statut : " + response.status;
@@ -1084,9 +1102,11 @@ const logoutElement = document.querySelector('.tls-navbar--slot a.tls-link-upper
 
             if (logoutElement) {
                 // Simuler un clic pour déclencher la déconnexion
-                logoutElement.click();
+                logoutElement.click();  clearInterval(home);
             } else {
                 console.error('The logout element was not found on the page.');
+                setTimeout(function(){  location.reload  }, 25000);
+
             }
 
     }
@@ -1101,7 +1121,7 @@ localStorage.setItem("403ERROR", 0);
 }
   }
 }
- }, 1000);
+ }, 2000);
 
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
@@ -1371,12 +1391,14 @@ setTimeout(() => {
 
 if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Casa2000@' ) {
 
+  //   if((document.body.innerText).indexOf('Invalid username or password.') > -1){  const call = errormessage }
+  //  else if
+
   const call = errormessage
   const xhr = new XMLHttpRequest();
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify({chat_id: '-1001955074728', text: call, parse_mode: 'html'}));
-  xhr.send(JSON.stringify({chat_id: '-1001955074728', text: errormessage2, parse_mode: 'html'}));
 
                          }
 else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Mohamed@33@' ) {
@@ -1385,7 +1407,6 @@ else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) ===
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify({chat_id: '-1001880026679', text: call, parse_mode: 'html'}));
-  xhr.send(JSON.stringify({chat_id: '-1001880026679', text: errormessage2, parse_mode: 'html'}));
 
 }
 else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Visa2022@'  || localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"))  === 'Visa2024@' ) {
@@ -1394,7 +1415,6 @@ else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) ===
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify({chat_id: '-1001925051993', text: call, parse_mode: 'html'}));
-  xhr.send(JSON.stringify({chat_id: '-1001925051993', text: errormessage2, parse_mode: 'html'}));
 }
 else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Oujda123456789*' ) {
   const call = errormessage
@@ -1402,7 +1422,6 @@ else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) ===
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify({chat_id: '-1002101071692', text: call, parse_mode: 'html'}));
-  xhr.send(JSON.stringify({chat_id: '-1002101071692', text: errormessage2, parse_mode: 'html'}));
 }
 else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Khalid@33@' ) {
   const call = errormessage
@@ -1410,7 +1429,6 @@ else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) ===
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify({chat_id: '-1002013849559', text: call, parse_mode: 'html'}));
-  xhr.send(JSON.stringify({chat_id: '-1002013849559', text: errormessage2, parse_mode: 'html'}));
 }
 setTimeout(() => {  window.location.href =  "https://blsspainmorocco.com/" }, 500000);
 
@@ -1749,15 +1767,17 @@ const firebaseConfig = {
 
 const fiAppointmentType2 = localStorage.getItem("fiAppointmentType"+localStorage.getItem("TLS_WEB_issuer"));
 let typo2 = "";
+var membre = localStorage.getItem("membre"+localStorage.getItem("TLS_WEB_issuer"));
+      if ( membre  > 1 ) { var t = "F" } else { t = "I" }
 
 if (fiAppointmentType2.includes("PRIMO") || fiAppointmentType2.includes("primo") || fiAppointmentType2.includes("Primo") || fiAppointmentType2.includes("privee") ) {
-  typo2 = "PRIMO" + window.location.pathname.split("/")[3];
+  typo2 = "PRIMO" + t + window.location.pathname.split("/")[3];
 } else if (fiAppointmentType2.includes("VISE") || fiAppointmentType2.includes("vise") || fiAppointmentType2.includes("Vise") || fiAppointmentType2.includes("visé")) {
-  typo2 = "VISE" + window.location.pathname.split("/")[3];
+  typo2 = "VISE" + t + window.location.pathname.split("/")[3];
 } else if (fiAppointmentType2.includes("Renouvellement") || fiAppointmentType2.includes("renouvellement") || fiAppointmentType2.includes("RENOUVELLEMENT")) {
-  typo2 = "VISE" + window.location.pathname.split("/")[3];
+  typo2 = "VISE" + t + window.location.pathname.split("/")[3];
 } else if (fiAppointmentType2.includes("CIRCULATION") || fiAppointmentType2.includes("circulation") || fiAppointmentType2.includes("Circulation")) {
-  typo2 = "CIRCULATION" + window.location.pathname.split("/")[3];
+  typo2 = "CIRCULATION" + t + window.location.pathname.split("/")[3];
 } else if (fiAppointmentType2.includes("Long Sejour") || fiAppointmentType2.includes("long sejour")) {
   typo2 = "Longsejour";
 } else {
@@ -2022,6 +2042,23 @@ const seconds = now.getUTCSeconds();
 setTimeout(function(){ //Submitable();
 setTimeout(function () {  window.location.href = window.location.href; }, 10e3);
 },6e3); }
+                            else
+if (response.status === 400) {consecutiveErrors++;
+if (consecutiveErrors >= 2) {console.error("Too many consecutive errors (2). Stopping execution.");return; }
+response.text().then(errorText => {
+console.error("Statut : " + response.status + " - " + errorText);
+document.getElementById("MOTIF").textContent = "Votre Book statut : " + response.status + " - " + errorText;
+setTimeout(function () { const intervalIdBut = setInterval(() => {const removedButtons = document.querySelectorAll('.tls-button-link');
+if (removedButtons.length > 1) {clearInterval(intervalIdBut);
+let previousIndex = -1; let randomIndex = Math.floor(Math.random() * removedButtons.length);
+while (randomIndex === previousIndex) {  randomIndex = Math.floor(Math.random() * removedButtons.length);}
+previousIndex = randomIndex;
+const randomButton = removedButtons[randomIndex];                    
+setTimeout(function () {  randomButton.click(); }, 1e3);} else { 
+setTimeout(function () { window.location.href = window.location.href; }, 100e3); 
+                }}, 1000); }, 1e3);
+    }).catch(err => console.error("Error reading response text:", err));}
+
             else
         if (response.status === 500) {
      document.getElementById("MOTIF").textContent = "votre book statut : " + response.status;
@@ -2038,7 +2075,7 @@ previousIndex = randomIndex;
 }  else { /*setTimeout(function(){ window.location.href = window.location },5e3); */}
 }, 1000); },1e3); },5e3); }
                     else
-        if ([502, 503, 504, 400].includes(response.status)) {
+        if ([502, 503, 504].includes(response.status)) {
      document.getElementById("MOTIF").textContent = "votre book statut : " + response.status;
 setTimeout(function(){            setTimeout(function(){ const intervalIdBut = setInterval(() => {
   const removedButtons = document.querySelectorAll('.tls-button-link')
@@ -2053,7 +2090,7 @@ previousIndex = randomIndex;
 }  else { setTimeout(function(){ window.location.href = window.location },5e3); }
 }, 500); },500); },1e3); }
                         else
-        if (response.status === 404 && consecutiveErrors < 2 ) {
+        if (response.status === 404 && consecutiveErrors < 1 ) {
                document.getElementById("MOTIF").textContent = "Votre book_appointment_fail || retry process";
 const element = document.querySelector('#MOTIF');element.style.backgroundColor = 'red';
   const removedButtons = document.querySelectorAll('.tls-button-link');
