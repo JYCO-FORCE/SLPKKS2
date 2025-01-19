@@ -1,14 +1,14 @@
 // ==UserScript==
-// @name         JYCOSCRIPT RENAISSANCE V1.1
+// @name         JYCOSCRIPT RENAISSANCE V1.2
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-15 12:44
+// @version      2025-01-19 14:32
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1 2025-01-15 12:44";
+var version = "V1.1 2025-01-19 14:32";
 
 var CLP ;
 
@@ -1105,7 +1105,7 @@ const logoutElement = document.querySelector('.tls-navbar--slot a.tls-link-upper
                 logoutElement.click();  clearInterval(home);
             } else {
                 console.error('The logout element was not found on the page.');
-                setTimeout(function(){  location.reload  }, 25000);
+                setTimeout(function(){  location.reload  }, 15000);
 
             }
 
@@ -2480,7 +2480,7 @@ var f_xcopy_ug_type1 = localStorage.getItem("f_xcopy_ug_type"+localStorage.getIt
     // Ajoutez cette fonction pour le bouton
     document.getElementById("bookButton").addEventListener("click", function() {
         // Remplacez ces valeurs par les valeurs souhaitées
-        const date = '2025-01-17';
+        const date = '2025-01-28';
         const time = '10:00';
         bookAppointment(date, time);
     });
