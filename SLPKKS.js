@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.2
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-19 14:32
+// @version      2025-01-22 20:04
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1 2025-01-19 14:32";
+var version = "V1.1 2025-01-22 20:04";
 
 var CLP ;
 
@@ -1105,8 +1105,14 @@ const logoutElement = document.querySelector('.tls-navbar--slot a.tls-link-upper
                 logoutElement.click();  clearInterval(home);
             } else {
                 console.error('The logout element was not found on the page.');
-                setTimeout(function(){  location.reload  }, 15000);
 
+                //revoir
+localStorage.setItem("403ERROR", 0);
+  const element5 = document.querySelector('a.tls-button-link');
+  if (element5) {  localStorage.removeItem('pageReloaded');
+ setTimeout(function(){  element5.click(); clearInterval(home);   }, 1000);
+}
+                
             }
 
     }
@@ -1839,16 +1845,25 @@ function sendMessage(targetRegion) {
     // Ajouter le conteneur à la page
     document.body.appendChild(buttonContainer);
 
-    // Ajouter les événements pour les boutons
-    buttonOujda.addEventListener("click", () => {
+// Ajouter les événements pour les boutons avec confirmation
+buttonOujda.addEventListener("click", () => {
+    if (confirm("Are you sure you want to switch to Oujda?")) {
         console.log("Switching to Oujda...");
         sendMessage("maOUD2fr");
-    });
+    } else {
+        console.log("Action canceled.");
+    }
+});
 
-    buttonCasablanca.addEventListener("click", () => {
+buttonCasablanca.addEventListener("click", () => {
+    if (confirm("Are you sure you want to switch to Casablanca?")) {
         console.log("Switching to Casablanca...");
         sendMessage("maCAS2fr");
-    });
+    } else {
+        console.log("Action canceled.");
+    }
+});
+
 })();
       },1e3);
 
