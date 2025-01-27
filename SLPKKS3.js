@@ -1,14 +1,14 @@
 // ==UserScript==
-// @name         JYCOSCRIPT RENAISSANCE V1.4
+// @name         JYCOSCRIPT RENAISSANCE V1.3
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-26 16:18
+// @version      2025-01-22 20:04
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.4 2025-01-26 16:18";
+var version = "V1.1 2025-01-22 20:04";
 
 var CLP ;
 var MAXO;
@@ -16,11 +16,11 @@ var MINO;
 
 
 if ( window.location.pathname.split("/")[3] == 'maOUD2fr') {
- MINO = 15e3; MAXO =  40e3;
+ MINO = 15e3; MAXO =  60e3;
 var cas1 = 15; var cas2 = 15; var cas3 = 15; var cas4 = 1;    
 }
 else if ( window.location.pathname.split("/")[3] == 'maCAS2fr') {
-   MINO = 15e3; MAXO =  40e3;
+   MINO = 15e3; MAXO =  60e3;
  cas1 = 5;  cas2 = 15;  cas3 = 15;  cas4 = 1;    
 }
 else if ( window.location.pathname.split("/")[3] == 'maTNG2fr') {
@@ -979,6 +979,48 @@ programmerActualisation();
 ////////// ESPACES SCRIPT /////////////                     ////////// ESPACES SCRIPT /////////////                ////////// ESPACES SCRIPT /////////////
 ////////// ESPACES SCRIPT /////////////                     ////////// ESPACES SCRIPT /////////////                ////////// ESPACES SCRIPT /////////////
 
+var errormessage ;
+function modal() {
+if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Casa2000@' ) {
+  const call = errormessage
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({chat_id: '-1001955074728', text: call, parse_mode: 'html'}));
+}
+else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Mohamed@33@' ) {
+  const call = errormessage
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({chat_id: '-1001880026679', text: call, parse_mode: 'html'}));
+}
+else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Visa2022@'  || localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"))  === 'Visa2024@' ) {
+  const call = errormessage
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({chat_id: '-1001925051993', text: call, parse_mode: 'html'}));
+}
+else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Oujda123456789*' ) {
+  const call = errormessage
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({chat_id: '-1002101071692', text: call, parse_mode: 'html'}));
+}
+else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Khalid@33@' ) {
+  const call = errormessage
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({chat_id: '-1002013849559', text: call, parse_mode: 'html'}));
+}
+setTimeout(() => {  window.location.href =  "https://blsspainmorocco.com/" }, 500000);
+}           
+////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
+////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
+    
 
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
@@ -1049,7 +1091,6 @@ clearInterval(appointment); },1e3);
 
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
-
 
 
 let formGroup = setInterval(() => {
@@ -1372,47 +1413,8 @@ applyCodeToSubmit();
 
 
 setTimeout(() => {
-
-    var errormessage = "⚠️⚠️⚠️⚠️⚠️⚠️ Formulaire_OFF" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) ;
-    var errormessage2 = "⚠️ Remplissage Individuel Automatique : " + "\n⚠️ A verfifier Ou confirmer" + "\n⚠️  Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))  + "\n⚠️ Center : " + window.location.pathname.split("/")[3] + "\n⚠️ MOTIF : " + localStorage.getItem("f_trav_purpose"+localStorage.getItem("TLS_WEB_issuer")) ;
-
-if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Casa2000@' ) {
-  const call = errormessage
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify({chat_id: '-1001955074728', text: call, parse_mode: 'html'}));
-}
-else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Mohamed@33@' ) {
-  const call = errormessage
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify({chat_id: '-1001880026679', text: call, parse_mode: 'html'}));
-}
-else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Visa2022@'  || localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"))  === 'Visa2024@' ) {
-  const call = errormessage
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify({chat_id: '-1001925051993', text: call, parse_mode: 'html'}));
-}
-else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Oujda123456789*' ) {
-  const call = errormessage
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify({chat_id: '-1002101071692', text: call, parse_mode: 'html'}));
-}
-else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) === 'Khalid@33@' ) {
-  const call = errormessage
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify({chat_id: '-1002013849559', text: call, parse_mode: 'html'}));
-}
-setTimeout(() => {  window.location.href =  "https://blsspainmorocco.com/" }, 500000);
-
+var errormessage = "⚠️⚠️⚠️⚠️⚠️⚠️ Formulaire_OFF" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));    
+modal();
 }, 1000);
 }
 }
@@ -1487,9 +1489,17 @@ setTimeout(function() {
 document.querySelector("#kc-login").on("click", function() {
 });
 }
- if((document.body.innerText).indexOf('Invalid username or password.') > -1){ setTimeout(function(){ document.body.style.backgroundColor = "#FFA500"; }, 2000); }
+ if((document.body.innerText).indexOf('Invalid username or password.') > -1){ setTimeout(function(){ document.body.style.backgroundColor = "#FFA500"; }, 2000);
+setTimeout(() => {
+var errormessage = "⚠️ Invalid username or password. ⚠️" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));    
+modal();
+}, 1000);}
     else
- if((document.body.innerText).indexOf("Nom d'utilisateur ou mot de passe invalide.") > -1){ setTimeout(function(){ document.body.style.backgroundColor = "#FFA500"; }, 2000); }
+ if((document.body.innerText).indexOf("Nom d'utilisateur ou mot de passe invalide.") > -1){ 
+     setTimeout(() => {
+var errormessage = "⚠️ Invalid username or password. ⚠️" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));    
+modal();
+}, 1000);  setTimeout(function(){ document.body.style.backgroundColor = "#FFA500"; }, 2000); }
 else  {
     setTimeout(function(){ Real(); }, 1000);
 }
