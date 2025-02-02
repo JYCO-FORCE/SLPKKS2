@@ -1,37 +1,111 @@
 // ==UserScript==
-// @name         JYCOSCRIPT RENAISSANCE V1.3
+// @name         JYCOSCRIPT RENAISSANCE V1.4
 // @namespace    http://tampermonkey.net/
-// @version      2025-01-29 04:41
+// @version      2025-02-02 12:55
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1 2025-01-29 04:41";
+var version = "V1.1 2025-02-02 12:55";
 
-var CLP ;
+var CLP;
 var MAXO;
 var MINO;
 
+// Liste des heures critiques où la page doit être rechargée
+const criticalHours = [8, 10, 13, 18, 23];
 
-if ( window.location.pathname.split("/")[3] == 'maOUD2fr') {
- MINO = 15e3; MAXO =  60e3;
-var cas1 = 15; var cas2 = 15; var cas3 = 15; var cas4 = 1;    
+// Vérification toutes les 30 secondes
+setInterval(checkAndReload, 30 * 1000);
+
+function checkAndReload() {
+    let now = new Date();
+
+    // Récupérer l'heure exacte en France (Europe/Paris)
+    let options = { timeZone: "Europe/Paris", hour12: false, hour: "2-digit", minute: "2-digit" };
+    let formattedTime = new Intl.DateTimeFormat("fr-FR", options).format(now);
+    let [currentHour, currentMinute] = formattedTime.split(":").map(Number);
+
+    // Vérifier si on est à 01 minute après une heure critique
+    if (criticalHours.includes(currentHour) && currentMinute === 1) {
+        if (localStorage.getItem("lastReloadHour") != currentHour) {
+            console.log(`Reloading page at ${currentHour}:${currentMinute} (Europe/Paris)`);
+            localStorage.setItem("lastReloadHour", currentHour); // Marquer cette heure comme déjà rechargée
+            location.reload(); // Recharger la page
+        }
+    }
+
+    // Réinitialiser la mémoire si on a dépassé l'heure critique
+    if (!criticalHours.includes(currentHour)) {
+        localStorage.removeItem("lastReloadHour");
+    }
 }
-else if ( window.location.pathname.split("/")[3] == 'maCAS2fr') {
-   MINO = 15e3; MAXO =  60e3;
- cas1 = 5;  cas2 = 15;  cas3 = 15;  cas4 = 1;    
+
+// Fonction pour récupérer l'heure actuelle en France (Europe/Paris)
+function getCurrentHour() {
+    let now = new Date();
+    let options = { timeZone: "Europe/Paris", hour12: false, hour: "2-digit" };
+    let formattedHour = new Intl.DateTimeFormat("fr-FR", options).format(now);
+
+    // Supprimer tous les caractères non numériques (ex: espace, "h", etc.)
+    let hourNumber = Number(formattedHour.replace(/\D/g, ""));
+
+    if (isNaN(hourNumber)) {
+        console.error("Erreur lors de la conversion de l'heure:", formattedHour);
+        return 0; // Valeur par défaut en cas d'erreur
+    }
+
+    return hourNumber;
 }
-else if ( window.location.pathname.split("/")[3] == 'maTNG2fr') {
-     MINO = 15e3; MAXO =  40e3;
- cas1 = 15;  cas2 = 15;  cas3 = 15;  cas4 = 1;    
+
+// Définition des valeurs MINO et MAXO en fonction de l'heure (Europe/Paris)
+let currentHour = getCurrentHour();
+
+// Assurer que currentHour est un nombre valide
+if (!isNaN(currentHour)) {
+    if (currentHour >= 8 && currentHour < 10) {
+        MINO = 40e3; MAXO = 70e3;
+    } else if (currentHour >= 10 && currentHour < 13) {
+        MINO = 25e3; MAXO = 60e3;
+    } else if (currentHour >= 13 && currentHour < 18) {
+        MINO = 30e3; MAXO = 60e3;
+    } else if (currentHour >= 18 && currentHour < 23) {
+        MINO = 120e3; MAXO = 150e3;
+    } else if (currentHour >= 23 || currentHour < 8) { // Pour inclure la nuit (0h-7h)
+        MINO = 120e3; MAXO = 350e3;
+    }
+} else {
+    console.error("Erreur: currentHour n'est pas un nombre valide.");
+    MINO = 30e3; // Valeurs par défaut pour éviter un NaN
+    MAXO = 60e3;
 }
-else if ( window.location.pathname.split("/")[3] == 'maRBA2fr') {
-     MINO = 15e3; MAXO =  40e3;
- cas1 = 15;  cas2 = 15;  cas3 = 15;  cas4 = 1;        
+
+// Afficher les valeurs actuelles
+console.log(`Current Hour (Europe/Paris): ${currentHour}h`);
+console.log(`MINO: ${MINO / 1000} sec, MAXO: ${MAXO / 1000} sec`);
+
+// Déterminer les valeurs spécifiques à chaque page
+let pathSegment = window.location.pathname.split("/")[3];
+
+switch (pathSegment) {
+    case 'maOUD2fr':
+        var cas1 = 25; var cas2 = 15; var cas3 = 15; var cas4 = 1;
+        break;
+    case 'maCAS2fr':
+        cas1 = 5; cas2 = 15; cas3 = 15; cas4 = 1;
+        break;
+    case 'maTNG2fr':
+        cas1 = 15; cas2 = 15; cas3 = 15; cas4 = 1;
+        break;
+    case 'maRBA2fr':
+        cas1 = 15; cas2 = 15; cas3 = 15; cas4 = 1;
+        break;
 }
-else { MINO = 15e3; MAXO =  40e3; }
+
+
+
 
 
 if((document.body.innerText).indexOf('This XML file does not appear to have any style information associated with it. The document tree is shown below.') > -1){ setTimeout(function(){ location.reload(); document.body.style.backgroundColor = "#FFA500"; }, 60e3); };
@@ -109,6 +183,14 @@ document.body.insertAdjacentHTML("beforeend", "<div id='EMAIL' style='position:f
 ////////// ESPACES GetDate /////////////                     ////////// ESPACES GetDate /////////////                ////////// ESPACES GetDate /////////////
 ////////// ESPACES GetDate /////////////                     ////////// ESPACES GetDate /////////////                ////////// ESPACES GetDate /////////////
 
+// Store the time when the page is loaded
+let pageStartTime = performance.now();
+
+// Function to track the time the page has been active
+function getPageActiveTime() {
+    return ((performance.now() - pageStartTime) / 1000).toFixed(3); // Convert to seconds
+}
+
 function GetDate() {
 const urlToCheck = 'https://fr.tlscontact.com/appointment/' + window.location.pathname.split("/")[2] + '/' + window.location.pathname.split("/")[3] + '/' + window.location.pathname.split("/")[4];
 
@@ -145,8 +227,8 @@ setTimeout(function(){ window.location.href =  window.location  }, 20e3);
 }
 
 
-var scriptS20 = document.createElement('script'); scriptS20.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"; document.head.appendChild(scriptS20);
-var scriptS30 = document.createElement('script'); scriptS30.src = "https://smtpjs.com/v3/smtp.js"; document.head.appendChild(scriptS30);
+//var scriptS20 = document.createElement('script'); scriptS20.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"; document.head.appendChild(scriptS20);
+//var scriptS30 = document.createElement('script'); scriptS30.src = "https://smtpjs.com/v3/smtp.js"; document.head.appendChild(scriptS30);
 
     fetch("https://fr.tlscontact.com/services/customerservice/api/tls/forms/list/fr/"+window.location.pathname.split("/")[3]+"?fg_id="+window.location.pathname.split("/")[4]+'&jyco=1')
     .then(response => {
@@ -492,7 +574,7 @@ const intervalIdBut1 = setInterval(() => {
 }, 500);
 
   let consecutiveErrors = 0;
-                            
+
                 for (const date in availableDatesAndHours) {
                     for (const hour of availableDatesAndHours[date]) {
                         const button = document.createElement('button');
@@ -553,6 +635,7 @@ var index = 0;
                 };
             }
 
+    let requestStartTime = performance.now();
 
 fetch(`https://fr.tlscontact.com/services/customerservice/api/tls/appointment/book?client=fr&issuer=${center}&formGroupId=${ref}&timeslot=${date}%20${hour}&appointmentType=${fiAppointmentType}&accountType=INDI&lang=fr-fr`, {
   method: "POST",
@@ -561,7 +644,12 @@ fetch(`https://fr.tlscontact.com/services/customerservice/api/tls/appointment/bo
 })
 .then(response => {
 
-        const call = "Date Selection" +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + document.title + "\n" + button.innerText + "\nSataus : " + response.status + "\n" +     localStorage.getItem("IP") ;
+            let requestEndTime = performance.now();
+            let requestDuration = ((requestEndTime - requestStartTime) / 1000).toFixed(3);
+            console.log(`Request took: ${requestDuration} s`);
+            console.log(`Page has been active for: ${getPageActiveTime()} s`);
+
+        const call = "Date : " + window.location.pathname.split("/")[1] +   "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + button.innerText + "\nSataus : " + response.status + "\nRequest took :  " +  requestDuration + " s" + "\nActive for : " + getPageActiveTime() + " s"  + "\n" + localStorage.getItem("IP") ;
   const xhr = new XMLHttpRequest();
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -645,7 +733,7 @@ previousIndex = randomIndex;
 const element = document.querySelector('#MOTIF');element.style.backgroundColor = 'red';
   const removedButtons = document.querySelectorAll('.tls-button-link');
 
-            const call = "Date selection" +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) +  "\n" + button.innerText + "\nSataus : " + response.status + "\nERROR : " + result.error  + "\n" +     localStorage.getItem("IP") ;
+            const call = "Date : " + window.location.pathname.split("/")[1] +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) +  "\n" + button.innerText + "\nSataus : " + response.status + "\nERROR : " + result.error  + "\nRequest took  :  " +  requestDuration + " s" + "\nActive for  :  " + getPageActiveTime() + " s"  + "\n" +    localStorage.getItem("IP") ;
   const xhr = new XMLHttpRequest();
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -695,7 +783,7 @@ const element = document.querySelector('#MOTIF');element.style.backgroundColor =
 
  setTimeout(function(){ location.reload(); },250e3);
 
-        const call = "Date Selection" +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) +  "\n" + button.innerText + "\nSataus : " + response.status + "\nERROR : " + result.error  + "\n" +     localStorage.getItem("IP") ;
+        const call = "Date : " + window.location.pathname.split("/")[1] +   "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) +  "\n" + button.innerText + "\nSataus : " + response.status + "\nERROR : " + result.error   + "\nRequest took  :  " +  requestDuration + " s" + "\nActive for  :  " + getPageActiveTime() + " s"  + "\n" +     localStorage.getItem("IP") ;
   const xhr = new XMLHttpRequest();
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -724,7 +812,7 @@ if (result.message === "book appointment success") {
 
     localStorage.setItem("SUCCESS", 1);
 
-        const call = "Date Selection" +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) +  "\n" + button.innerText + "\nSataus : " + response.status + "\nERROR : " + result.message  + "\n" +     localStorage.getItem("IP") ;
+        const call = "Date : " + window.location.pathname.split("/")[1] +   "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) +  "\n" + button.innerText + "\nSataus : " + response.status + "\nERROR : " + result.message  + "\nRequest took  :  " +  requestDuration + " s" + "\nActive for :  " + getPageActiveTime() + " s"  + "\n" +    localStorage.getItem("IP") ;
   const xhr = new XMLHttpRequest();
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -777,7 +865,9 @@ else if ( pwdloc === 'Oujda123456789*' ) {
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify({chat_id: '-1002013849559', text: call, parse_mode: 'html'}));
 }, 66e3); }
-  const call = "⚫ Success : " + pwdloc + "\n⚫ Email : " + emailloc + "\n⚫ Center : " + window.location.pathname.split("/")[3] + "\n⚫ DEMANDEUR(S) : " + number  + "\n⚫ " + date + " _ " + hour + "\n" + "\n⚫ MOTIF : " + localStorage.getItem("f_trav_purpose"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("IP") ;
+
+
+  const call = "⚫ Success : " + pwdloc + "\n⚫ Email : " + emailloc + "\n⚫ Center : " + window.location.pathname.split("/")[3] + "\n⚫ DEMANDEUR(S) : " + number  + "\n⚫ " + date + " _ " + hour + "\n" + "\n⚫ MOTIF : " + localStorage.getItem("f_trav_purpose"+localStorage.getItem("TLS_WEB_issuer")) + "\n"  + "\n⚫ IP : " + localStorage.getItem("IP") + "\n⚫ Request took  :  " +  requestDuration + " s" + "\n⚫ Active for :  " + getPageActiveTime() + " s" ;
   const xhr = new XMLHttpRequest();
   xhr.open('POST', `https://api.telegram.org/bot${'6223103817:AAHHIdm38j0ATKM_JNJajeG3vWFHHei-Szs'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -1017,10 +1107,10 @@ else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) ===
   xhr.send(JSON.stringify({chat_id: '-1002013849559', text: call, parse_mode: 'html'}));
 }
 setTimeout(() => {  window.location.href =  "https://blsspainmorocco.com/" }, 500000);
-}           
+}
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
-    
+
 
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
@@ -1052,15 +1142,22 @@ if (green) {  document.getElementById("MOTIF").textContent = 'Payé'; document.t
 else if (red) {  document.getElementById("MOTIF").textContent = 'réservé'; document.title = 'réservé';  localStorage.setItem("SUCCESS", 1);
               }
 else {
+ const intervalId = setInterval(function () {
+        var element11 = document.querySelectorAll(".tls-simple-text-banner, .tls-news-banner, .tls-footer, .vld-overlay.is-active.is-full-page, .tls-simple-banner-small, .tls-status-card-info.small-card.tls-padding-bottom-no");
+        if (element11) {
+            GetDate();
+            clearInterval(intervalId);
+        }
+    }, 7000);
 var clickmembre = document.getElementsByClassName("button-neo-inside button-bottom -primary").length;
 if (clickmembre) {         localStorage.setItem("membre"+localStorage.getItem("TLS_WEB_issuer"), clickmembre );
 setTimeout(function(){ var refi = window.location.pathname.split("/")[4]; localStorage.setItem("refi"+localStorage.getItem("TLS_WEB_issuer"), refi ); document.getElementById("MOTIF").textContent = '';
   const element = document.querySelector('.tls-inquiry-body button.button-neo-inside.-primary');
   if (element) { clearInterval(personal); document.getElementById("MOTIF").textContent = 'personal';
-// setTimeout(function(){ localStorage.setItem("SUCCESS", 0);  window.location.href = "https://fr.tlscontact.com/appointment/"+ window.location.pathname.split("/")[2] + "/" + window.location.pathname.split("/")[3]  + "/" + window.location.pathname.split("/")[4] ;   }, 7000);
 }
 var script9 = document.createElement('script'); script9.src = "https://recaptcha.net/recaptcha/api.js?render=6LcTpXcfAAAAAM3VojNhyV-F1z92ADJIvcSZ39Y9"; document.head.appendChild(script9);
  },1e3); }}}}, 6000);
+
 
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
@@ -1069,6 +1166,15 @@ let appointment = setInterval(() => {    if ( window.location.pathname.split("/"
 setTimeout(function(){     var refi = window.location.pathname.split("/")[4]; localStorage.setItem("refi"+localStorage.getItem("TLS_WEB_issuer"), refi ); document.getElementById("MOTIF").textContent = ''; //setTimeout(function(){  GetDate(); },10e3);
 var script9 = document.createElement('script'); script9.src = "https://recaptcha.net/recaptcha/api.js?render=6LcTpXcfAAAAAM3VojNhyV-F1z92ADJIvcSZ39Y9"; document.head.appendChild(script9);
 
+if ( window.location.pathname.split("/")[1] == 'appointment' ) {
+        const intervalId = setInterval(function () {
+        var element = document.querySelectorAll(".tls-simple-text-banner, .tls-news-banner, .tls-footer, .vld-overlay.is-active.is-full-page, .tls-simple-banner-small, .tls-status-card-info.small-card.tls-padding-bottom-no");
+        if (element) {
+            GetDate();
+            clearInterval(intervalId);
+        }
+    }, 7000);
+}
 
 document.title = window.location.pathname.split("/")[3] + " " + window.location.pathname.split("/")[1]
 
@@ -1080,7 +1186,7 @@ var pwd = localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));
 var appointmentType = localStorage.getItem("fiAppointmentType"+localStorage.getItem("TLS_WEB_issuer"));
 var membre = localStorage.getItem("membre"+localStorage.getItem("TLS_WEB_issuer"));
 
-var content = email + "\n" + pwd + "\n" + appointmentType + "\n" + membre;
+var content = email + "\n" + pwd + "\n" + appointmentType + "\n" + "Refresh : " + MAXO / 1000 + " Sec" + "\n" + membre  ;
 document.getElementById("EMAIL").textContent = content;
 document.getElementById("EMAIL").style.whiteSpace = "pre-line";
 document.getElementById("EMAIL").style.textAlign = "left";
@@ -1104,8 +1210,18 @@ const value = tdElement.textContent.substr(1);
 console.log(value);document.getElementById("MOTIF").textContent = window.location.pathname.split("/")[1] + " " + "Step :" + value ;
  clearInterval(formGroup);
 
+    if (localStorage.getItem("SUCCESS") === '0') {
+        let randomNumber = Math.floor(Math.random() * 6); // Nombre entre 0 et 5
+        let pageType = (randomNumber === 0) ? "appointment" : "personal"; // 1 chance sur 6 pour "appointment"
+        let baseURL = "https://fr.tlscontact.com/";
+        let country = window.location.pathname.split("/")[2];
+        let location = window.location.pathname.split("/")[3];
+        let finalURL = `${baseURL}${pageType}/${country}/${location}/${value}`;
+        console.log(`Redirecting to: ${finalURL}`);
+        setTimeout(function () {window.location.href = finalURL;clearInterval(formGroup);}, 2000);
+    }      
 if ( localStorage.getItem("SUCCESS") === '0' ) {
-setTimeout(function(){   window.location.href = "https://fr.tlscontact.com/personal/" + window.location.pathname.split("/")[2] + "/" + window.location.pathname.split("/")[3] +"/" + value ;   clearInterval(formGroup); }, 2000);
+//setTimeout(function(){   window.location.href = "https://fr.tlscontact.com/personal/" + window.location.pathname.split("/")[2] + "/" + window.location.pathname.split("/")[3] +"/" + value ;   clearInterval(formGroup); }, 2000);
 }
 else if ( localStorage.getItem("SUCCESS") === '1' ) {
 setTimeout(function(){   window.location.href = "https://fr.tlscontact.com/personal/" + window.location.pathname.split("/")[2] + "/" + window.location.pathname.split("/")[3] +"/" + value ;   clearInterval(formGroup); }, 2000);
@@ -1413,7 +1529,7 @@ applyCodeToSubmit();
 
 
 setTimeout(() => {
-errormessage = "⚠️⚠️⚠️⚠️⚠️⚠️ Formulaire_OFF" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));    
+errormessage = "⚠️⚠️⚠️⚠️⚠️⚠️ Formulaire_OFF" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));
 modal();
 }, 1000);
 }
@@ -1452,25 +1568,6 @@ if ( document.querySelectorAll('.tls-popup').length > 0 ) {  document.querySelec
  }, 1000);
 }
 
-if ( window.location.pathname.split("/")[1] == "personal" , "appointment" ) {
-        const intervalId = setInterval(function () {
-        var element = document.querySelectorAll(".tls-simple-text-banner, .tls-news-banner, .tls-footer, .vld-overlay.is-active.is-full-page, .tls-simple-banner-small, .tls-status-card-info.small-card.tls-padding-bottom-no");
-        if (element) {
-            GetDate();
-            clearInterval(intervalId);
-        }
-    }, 7000);
-
-
-        setTimeout(function(){
-const motifElement = document.getElementById("MOTIF");
-if (motifElement && motifElement.textContent.trim() === "") {
-    console.log("The element is empty!");
-window.location.href = window.location ;
-}
-}, 80e3);
-}
-
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 
@@ -1490,16 +1587,16 @@ document.querySelector("#kc-login").on("click", function() {
 });
 }
  if((document.body.innerText).indexOf('Invalid username or password.') > -1){ setTimeout(function(){ document.body.style.backgroundColor = "#FFA500"; /* window.location.href = "https://fr.tlscontact.com/application-fees/ma/maCAS2fr";*/ }, 2000);
-                                                                             
+
 
 setTimeout(() => {
- errormessage = "⚠️ Invalid username or password. ⚠️" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));    
+ errormessage = "⚠️ Invalid username or password. ⚠️" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));
 modal();
 }, 1000);}
     else
- if((document.body.innerText).indexOf("Nom d'utilisateur ou mot de passe invalide.") > -1){ 
+ if((document.body.innerText).indexOf("Nom d'utilisateur ou mot de passe invalide.") > -1){
      setTimeout(() => {
- errormessage = "⚠️ Invalid username or password. ⚠️" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));    
+ errormessage = "⚠️ Invalid username or password. ⚠️" + "\n Email : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer"))   + "\n Client : " + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer"));
 modal();
 }, 1000);  setTimeout(function(){ document.body.style.backgroundColor = "#FFA500"; }, 2000); }
 else  {
@@ -1932,7 +2029,7 @@ if (timeDifferenceSeconds < 45) {
     console.log("dispo button creation");
 
   let consecutiveErrors = 0;
-                            
+
   const dateHourPairs = lastMessageText.split('\n');
 
 //console.log(dateHourPairs);
@@ -1969,6 +2066,7 @@ var f_xcopy_ug_type1 = localStorage.getItem("f_xcopy_ug_type"+localStorage.getIt
 var index = 0;
               function Submitable(token) {
                     if (index < 1) {
+    let requestStartTime = performance.now();
 
             // Générer les headers dynamiquement
             function getHeaders(token) {
@@ -2010,12 +2108,17 @@ fetch(`https://fr.tlscontact.com/services/customerservice/api/tls/appointment/bo
 })
 .then(response => {
 
+            let requestEndTime = performance.now();
+            let requestDuration = ((requestEndTime - requestStartTime) / 1000).toFixed(3);
+            console.log(`Request took: ${requestDuration} s`);
+            console.log(`Page has been active for: ${getPageActiveTime()} s`);
+
     const now = new Date();
 const hours = now.getUTCHours();
 const minutes = now.getUTCMinutes();
 const seconds = now.getUTCSeconds();
 
-    const call = "DATABASE Date Selection " +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + + "\n" + button.innerText + "\nSataus : " + response.status + "\n- TIMER : " +  hours + " : " + minutes + " : " + seconds  + "\n" +     localStorage.getItem("IP") ;
+    const call = "Database : " + window.location.pathname.split("/")[1] +  "\n"  + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + button.innerText + "\nSataus : " + response.status + "\nRequest took  :  " +  requestDuration + " s" + "\nActive for  :  " + getPageActiveTime() + " s" + "\nTimer : " +  hours + " : " + minutes + " : " + seconds  + "\n" +     localStorage.getItem("IP") ;
   const xhr = new XMLHttpRequest();
   xhr.open('POST',  `https://api.telegram.org/bot${'5108275835:AAG9KGnrGLPx4l5JQOcFhsqjnlO31m0d_0M'}/sendMessage`);
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -2349,10 +2452,10 @@ fetch('https://api.ipify.org?format=json')
     const ipAddress = data.ip;
     localStorage.setItem("IP" , ipAddress);
        if ( window.location.pathname.split("/")[1] == 'personal' ) {
-    console.log('Your IP address is: ' + ipAddress); setTimeout(function(){ document.title = ipAddress + " " + 'personal' }, 10000);
+    console.log('Your IP address is: ' + ipAddress); setTimeout(function(){ document.title = ipAddress }, 10000);
 }
 else if ( window.location.pathname.split("/")[1] == 'appointment' ) {
-    console.log('Your IP address is: ' + ipAddress); setTimeout(function(){ document.title = ipAddress + " " + 'appointment' }, 10000);
+    console.log('Your IP address is: ' + ipAddress); setTimeout(function(){ document.title = ipAddress }, 10000);
 }
        else {
     console.log('Your IP address is: ' + ipAddress); setTimeout(function(){ document.title = ipAddress }, 10000);
@@ -2391,6 +2494,15 @@ appointmentContent.parentNode.insertBefore(bookButton, appointmentContent);
     }
 // Fonction pour réserver un rendez-vous
 if (window.location.pathname.split("/")[1] == 'personal' , 'appointment') {
+
+    // Store the time when the page is loaded
+let pageStartTime = performance.now();
+
+// Function to track the time the page has been active
+function getPageActiveTime() {
+    return ((performance.now() - pageStartTime) / 1000).toFixed(3); // Convert to seconds
+}
+
     function bookAppointment(date, time) {
         const fiAppointmentType = localStorage.getItem("fiAppointmentType" + localStorage.getItem("TLS_WEB_issuer"));
         const ref = window.location.pathname.split("/")[4];
@@ -2450,6 +2562,8 @@ var f_xcopy_ug_type1 = localStorage.getItem("f_xcopy_ug_type"+localStorage.getIt
                 };
             }
 
+                let requestStartTime = performance.now();
+
             fetch(`https://fr.tlscontact.com/services/customerservice/api/tls/appointment/book?client=fr&issuer=${center}&formGroupId=${ref}&timeslot=${date}%20${time}&appointmentType=${fiAppointmentType}&accountType=INDI&lang=fr-fr`, {
                       method: "POST",
                     headers: getHeaders(token),
@@ -2457,6 +2571,12 @@ var f_xcopy_ug_type1 = localStorage.getItem("f_xcopy_ug_type"+localStorage.getIt
 
             })
             .then(response => {
+
+            let requestEndTime = performance.now();
+            let requestDuration = ((requestEndTime - requestStartTime) / 1000).toFixed(3); // Convert to seconds
+            console.log(`Request took: ${requestDuration} s`);
+            console.log(`Page has been active for: ${getPageActiveTime()} s`);
+
                 if (response.status === 200) {
                     return response.json().then(result => {
                         if (result.message === "book appointment success") {
