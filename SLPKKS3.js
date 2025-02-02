@@ -18,7 +18,7 @@ var MINO;
 const criticalHours = [8, 10, 13, 18, 23];
 
 // Vérification toutes les 30 secondes
-setInterval(checkAndReload, 30 * 1000);
+setInterval(checkAndReload, 43 * 1000);
 
 function checkAndReload() {
     let now = new Date();
