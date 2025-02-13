@@ -66,9 +66,9 @@ let currentHour = getCurrentHour();
 // Assurer que currentHour est un nombre valide
 if (!isNaN(currentHour)) {
     if (currentHour >= 8 && currentHour < 10) {
-        MINO = 40e3; MAXO = 70e3;
+        MINO = 40e3; MAXO = 120e3;
     } else if (currentHour >= 10 && currentHour < 13) {
-        MINO = 25e3; MAXO = 60e3;
+        MINO = 20e3; MAXO = 67e3;
     } else if (currentHour >= 13 && currentHour < 18) {
         MINO = 30e3; MAXO = 60e3;
     } else if (currentHour >= 18 && currentHour < 23) {
@@ -362,13 +362,16 @@ const cookieValueTable = document.cookie.split('; ').find(row => row.startsWith(
       .then(response => {
         if (response.status === 429) {
 
+if ( localStorage.getItem("cloudflare") == "0" ) { 
  setTimeout(function(){    window.open('https://fr.tlscontact.com/services/customerservice/api/tls/appointment/ma/maCAS2fr/table?cloudflare', '_blank');   }, 5e3);
  setTimeout(function(){    Gettable();   }, 65e3);
-            
+ localStorage.setItem("cloudflare", 1);
+}            
         document.getElementById("MOTIF").textContent = "votre table statut : " + response.status + " blocked ";
         console.error("statut : " + response.status);
 message = "statut 429 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP");
-       // ERROR();
+       
+    // ERROR();
             
             /*
 localStorage.setItem("input429", parseInt(localStorage.getItem("input429")) + parseInt(1));
@@ -405,10 +408,14 @@ else if (response.status === 403) { localStorage.setItem("inputi403", 1);
 
 //setTimeout(function () { window.location.href = window.location.href; }, 1000e3);
 
+   
+                                   if ( localStorage.getItem("cloudflare") == "0" ) { 
  setTimeout(function(){    window.open('https://fr.tlscontact.com/services/customerservice/api/tls/appointment/ma/maCAS2fr/table?cloudflare', '_blank');   }, 5e3);
  setTimeout(function(){    Gettable();   }, 65e3);
+ localStorage.setItem("cloudflare", 1);
+                                   }
                                    
-                                   
+/*                                   
     function ERROR403() {
 (async function handleUrlRequest() {
     const URL_1 = "https://fr.tlscontact.com/oauth2/authorization/oidc";
@@ -416,7 +423,9 @@ else if (response.status === 403) { localStorage.setItem("inputi403", 1);
         const response = await fetch(URL_1, {
             method: "GET",
             headers: {
-                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*
+                /*;q=0.8",
+                /// ACCEPT MODIFY DELTE SPACE
                 "User-Agent": navigator.userAgent,
             },
         });
@@ -444,7 +453,7 @@ const disconnect403 = 3;
         localStorage.setItem("inputi403", parseInt(localStorage.getItem("inputi403")) + parseInt(1));
         document.getElementById("MOTIF").textContent = "votre table statut : " + response.status;
         console.error("statut : " + response.status);
-        setTimeout(function(){ /*Gettable();*/ document.title = "403 DETECTED" },90e3);
+        setTimeout(function(){ document.title = "403 DETECTED" },90e3);
         //setTimeout(function(){ ERROR403(); },50e3);
         tt = Math.floor(Math.random() * 10);
 
@@ -459,6 +468,7 @@ const disconnect403 = 3;
            // window.location = "https://intfiction.org/uploads/default/optimized/2X/e/e04f0a22ef639e39ff3bffd9c319e02146c95406_2_1035x541.png";
         }, 5000);
     }
+    */
                                      }
 
             ////////// ESPACE 403 /////////////                     ////////// ESPACE 403 /////////////                ////////// ESPACE 403 /////////////
@@ -982,6 +992,7 @@ saveButtons.forEach(button => {
                 localStorage.setItem("input429", 0); localStorage.setItem("FORMS429", 0); localStorage.removeItem('pageReloaded'); localStorage.setItem("403ERROR", 0);
                 document.getElementById("MOTIF").textContent = "Status : Aucune date disponible . " + "\n" + "Derniere Actualisation" + " " + hours + " : " + minutes + " : " + seconds;
                 console.log("Status : Aucune date disponible . " + "\n" + "Derniere Actualisation" + " " + hours + " : " + minutes + " : " + seconds);
+                localStorage.setItem("cloudflare", 0);
 
                 function getRandomDelay(min, max) {
     return Math.random() * (max - min) + min;
@@ -1216,6 +1227,7 @@ let formGroup = setInterval(() => {
 if ( window.location.pathname.split("/")[1] == 'formGroup' ) {
  const button = document.querySelector('button.tls-button-primary.button-neo-inside');
   if (button) {
+      localStorage.setItem("cloudflare", 0);
 const trElement = document.querySelector('tr.tls-table-content');
 const tdElement = trElement.querySelector('td.tls-table-cell');
 const membreElement = trElement.querySelector('td.tls-table-cell.tls-table-cells');
