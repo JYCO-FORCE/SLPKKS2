@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.4
 // @namespace    http://tampermonkey.net/
-// @version      2025-02-13 10:10 +
+// @version      2025-02-13 11:00 
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1 2025-02-13 10:10";
+var version = "V1.1 2025-02-13 11:00";
 
 var CLP;
 var MAXO;
@@ -2454,6 +2454,9 @@ saveButtons.forEach(button => {
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 
+if (window.location.href.includes('cloudflare')) {
+    console.log("Waiting for Cloudflare verification...");
+    
 setTimeout(() => {
     if (document.title !== 'tlscontact.com' && 
         document.title !== 'Un instant…' && 
@@ -2465,6 +2468,7 @@ setTimeout(() => {
         
     }
 }, 5000); 
+}
 
 if (document.title !== 'tlscontact.com' && document.title !== 'Un instant…' && document.title !== 'Just a moment...') {
     
