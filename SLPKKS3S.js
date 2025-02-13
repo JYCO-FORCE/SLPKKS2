@@ -364,9 +364,9 @@ const cookieValueTable = document.cookie.split('; ').find(row => row.startsWith(
 
 if ( localStorage.getItem("cloudflare") == "0" ) { 
  setTimeout(function(){    window.open('https://fr.tlscontact.com/services/customerservice/api/tls/appointment/ma/maCAS2fr/table?cloudflare', '_blank');   }, 5e3);
- setTimeout(function(){    Gettable();   }, 65e3);
  localStorage.setItem("cloudflare", 1);
 }            
+        setTimeout(function(){    Gettable();   }, 65e3);
         document.getElementById("MOTIF").textContent = "votre table statut : " + response.status + " blocked ";
         console.error("statut : " + response.status);
 message = "statut 429 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP");
@@ -411,9 +411,10 @@ else if (response.status === 403) { localStorage.setItem("inputi403", 1);
    
                                    if ( localStorage.getItem("cloudflare") == "0" ) { 
  setTimeout(function(){    window.open('https://fr.tlscontact.com/services/customerservice/api/tls/appointment/ma/maCAS2fr/table?cloudflare', '_blank');   }, 5e3);
- setTimeout(function(){    Gettable();   }, 65e3);
  localStorage.setItem("cloudflare", 1);
                                    }
+     setTimeout(function(){    Gettable();   }, 65e3);
+
                                    
 /*                                   
     function ERROR403() {
