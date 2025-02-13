@@ -1,14 +1,14 @@
 // ==UserScript==
-// @name         JYCOSCRIPT RENAISSANCE V1.4
+// @name         JYCOSCRIPT RENAISSANCE V1.5
 // @namespace    http://tampermonkey.net/
-// @version      2025-02-13 16:01 +
+// @version      2025-02-13 22:01 
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1 2025-02-13 16:01";
+var version = "V1.1 2025-02-13 22:01";
 
 var CLP;
 var MAXO;
@@ -66,13 +66,13 @@ let currentHour = getCurrentHour();
 // Assurer que currentHour est un nombre valide
 if (!isNaN(currentHour)) {
     if (currentHour >= 8 && currentHour < 10) {
-        MINO = 140e3; MAXO = 180e3;
+        MINO = 40e3; MAXO = 120e3;
     } else if (currentHour >= 10 && currentHour < 13) {
-        MINO = 30e3; MAXO = 80e3;
+        MINO = 20e3; MAXO = 40e3;
     } else if (currentHour >= 13 && currentHour < 18) {
-        MINO = 30e3; MAXO = 80e3;
+        MINO = 30e3; MAXO = 40e3;
     } else if (currentHour >= 18 && currentHour < 23) {
-        MINO = 120e3; MAXO = 220e3;
+        MINO = 20e3; MAXO = 120e3;
     } else if (currentHour >= 23 || currentHour < 8) { // Pour inclure la nuit (0h-7h)
         MINO = 120e3; MAXO = 350e3;
     }
@@ -366,8 +366,7 @@ if ( localStorage.getItem("cloudflare") == "0" ) {
  setTimeout(function(){    window.open('https://fr.tlscontact.com/services/customerservice/api/tls/appointment/ma/maCAS2fr/table?cloudflare', '_blank');   }, 5e3);
  localStorage.setItem("cloudflare", 1);
 }            
- setTimeout(function(){    Gettable();   }, 65e3);
-
+        setTimeout(function(){    Gettable();   }, 65e3);
         document.getElementById("MOTIF").textContent = "votre table statut : " + response.status + " blocked ";
         console.error("statut : " + response.status);
 message = "statut 429 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP");
@@ -407,16 +406,17 @@ message = "statut 404 : " + localStorage.getItem("Email"+localStorage.getItem("T
 
 else if (response.status === 403) { localStorage.setItem("inputi403", 1);
 
-//setTimeout(function () { window.location.href = window.location.href; }, 1000e3);
+setTimeout(function () { window.location.href = window.location.href; }, 1000e3);
 
-   
+   /*
                                    if ( localStorage.getItem("cloudflare") == "0" ) { 
  setTimeout(function(){    window.open('https://fr.tlscontact.com/services/customerservice/api/tls/appointment/ma/maCAS2fr/table?cloudflare', '_blank');   }, 5e3);
  localStorage.setItem("cloudflare", 1);
                                    }
- setTimeout(function(){    Gettable();   }, 65e3);
+     setTimeout(function(){    Gettable();   }, 65e3);
+*/
                                    
-/*                                   
+                                   
     function ERROR403() {
 (async function handleUrlRequest() {
     const URL_1 = "https://fr.tlscontact.com/oauth2/authorization/oidc";
@@ -424,8 +424,7 @@ else if (response.status === 403) { localStorage.setItem("inputi403", 1);
         const response = await fetch(URL_1, {
             method: "GET",
             headers: {
-                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*
-                /*;q=0.8",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                 /// ACCEPT MODIFY DELTE SPACE
                 "User-Agent": navigator.userAgent,
             },
@@ -469,7 +468,6 @@ const disconnect403 = 3;
            // window.location = "https://intfiction.org/uploads/default/optimized/2X/e/e04f0a22ef639e39ff3bffd9c319e02146c95406_2_1035x541.png";
         }, 5000);
     }
-    */
                                      }
 
             ////////// ESPACE 403 /////////////                     ////////// ESPACE 403 /////////////                ////////// ESPACE 403 /////////////
