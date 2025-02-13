@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.4
 // @namespace    http://tampermonkey.net/
-// @version      2025-02-13 11:01 
+// @version      2025-02-13 16:01 +
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1 2025-02-13 11:01";
+var version = "V1.1 2025-02-13 16:01";
 
 var CLP;
 var MAXO;
@@ -364,9 +364,10 @@ const cookieValueTable = document.cookie.split('; ').find(row => row.startsWith(
 
 if ( localStorage.getItem("cloudflare") == "0" ) { 
  setTimeout(function(){    window.open('https://fr.tlscontact.com/services/customerservice/api/tls/appointment/ma/maCAS2fr/table?cloudflare', '_blank');   }, 5e3);
- setTimeout(function(){    Gettable();   }, 65e3);
  localStorage.setItem("cloudflare", 1);
 }            
+ setTimeout(function(){    Gettable();   }, 65e3);
+
         document.getElementById("MOTIF").textContent = "votre table statut : " + response.status + " blocked ";
         console.error("statut : " + response.status);
 message = "statut 429 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP");
@@ -411,9 +412,9 @@ else if (response.status === 403) { localStorage.setItem("inputi403", 1);
    
                                    if ( localStorage.getItem("cloudflare") == "0" ) { 
  setTimeout(function(){    window.open('https://fr.tlscontact.com/services/customerservice/api/tls/appointment/ma/maCAS2fr/table?cloudflare', '_blank');   }, 5e3);
- setTimeout(function(){    Gettable();   }, 65e3);
  localStorage.setItem("cloudflare", 1);
                                    }
+ setTimeout(function(){    Gettable();   }, 65e3);
                                    
 /*                                   
     function ERROR403() {
