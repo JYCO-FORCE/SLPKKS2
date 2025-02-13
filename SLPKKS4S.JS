@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.4
 // @namespace    http://tampermonkey.net/
-// @version      2025-02-02 12:55
+// @version      2025-02-13 11:01 
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1 2025-02-02 12:55";
+var version = "V1.1 2025-02-13 11:01";
 
 var CLP;
 var MAXO;
@@ -66,15 +66,15 @@ let currentHour = getCurrentHour();
 // Assurer que currentHour est un nombre valide
 if (!isNaN(currentHour)) {
     if (currentHour >= 8 && currentHour < 10) {
-        MINO = 40e3; MAXO = 170e3;
+        MINO = 40e3; MAXO = 120e3;
     } else if (currentHour >= 10 && currentHour < 13) {
-        MINO = 10e3; MAXO = 30e3;
+        MINO = 10e3; MAXO = 40e3;
     } else if (currentHour >= 13 && currentHour < 18) {
-        MINO = 10e3; MAXO = 30e3;
+        MINO = 10e3; MAXO = 40e3;
     } else if (currentHour >= 18 && currentHour < 23) {
-        MINO = 120e3; MAXO = 250e3;
+        MINO = 120e3; MAXO = 150e3;
     } else if (currentHour >= 23 || currentHour < 8) { // Pour inclure la nuit (0h-7h)
-        MINO = 120e3; MAXO = 450e3;
+        MINO = 120e3; MAXO = 350e3;
     }
 } else {
     console.error("Erreur: currentHour n'est pas un nombre valide.");
@@ -91,7 +91,7 @@ let pathSegment = window.location.pathname.split("/")[3];
 
 switch (pathSegment) {
     case 'maOUD2fr':
-        var cas1 = 25; var cas2 = 15; var cas3 = 15; var cas4 = 1;
+        var cas1 = 25; var cas2 = 10; var cas3 = 15; var cas4 = 1;
         break;
     case 'maCAS2fr':
         cas1 = 4; cas2 = 15; cas3 = 15; cas4 = 1;
@@ -361,6 +361,16 @@ const cookieValueTable = document.cookie.split('; ').find(row => row.startsWith(
 })
       .then(response => {
         if (response.status === 429) {
+
+ setTimeout(function(){    window.open('https://fr.tlscontact.com/services/customerservice/api/tls/appointment/ma/maCAS2fr/table?cloudflare', '_blank');   }, 5e3);
+ setTimeout(function(){    Gettable();   }, 65e3);
+            
+        document.getElementById("MOTIF").textContent = "votre table statut : " + response.status + " blocked ";
+        console.error("statut : " + response.status);
+message = "statut 429 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP");
+       // ERROR();
+            
+            /*
 localStorage.setItem("input429", parseInt(localStorage.getItem("input429")) + parseInt(1));
 const input429 = localStorage.getItem("input429");
 const disconnect429 = 3;
@@ -371,14 +381,13 @@ const disconnect429 = 3;
         setTimeout(function(){ window.location.href =  window.location  }, 60e3);
     } else if (parseInt(localStorage.getItem("input429")) > disconnect429) {
                 localStorage.setItem("input429", 0);
-        document.getElementById("MOTIF").textContent = "votre table statut : " + response.status + " blocked ";
-        console.error("statut : " + response.status);
-message = "statut 429 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP");
-        ERROR();
+
+
         setTimeout(function () {
             window.location = "https://intfiction.org/uploads/default/optimized/2X/e/e04f0a22ef639e39ff3bffd9c319e02146c95406_2_1035x541.png";
         }, 5000);
     }
+    */
 }
 
 else if (response.status === 404) {  console.error("statut : " + response.status); document.getElementById("MOTIF").textContent = "votre table statut : " + response.status;
@@ -394,8 +403,12 @@ message = "statut 404 : " + localStorage.getItem("Email"+localStorage.getItem("T
 
 else if (response.status === 403) { localStorage.setItem("inputi403", 1);
 
-setTimeout(function () { window.location.href = window.location.href; }, 1000e3);
+//setTimeout(function () { window.location.href = window.location.href; }, 1000e3);
 
+ setTimeout(function(){    window.open('https://fr.tlscontact.com/services/customerservice/api/tls/appointment/ma/maCAS2fr/table?cloudflare', '_blank');   }, 5e3);
+ setTimeout(function(){    Gettable();   }, 65e3);
+                                   
+                                   
     function ERROR403() {
 (async function handleUrlRequest() {
     const URL_1 = "https://fr.tlscontact.com/oauth2/authorization/oidc";
@@ -2441,10 +2454,24 @@ saveButtons.forEach(button => {
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 ////////// X/X/X/ /////////////                     ////////// X/X/X/ /////////////                ////////// X/X/X/ /////////////
 
-
+if (window.location.href.includes('cloudflare')) {
+    console.log("Waiting for Cloudflare verification...");
+    
+setTimeout(() => {
+    if (document.title !== 'tlscontact.com' && 
+        document.title !== 'Un instant…' && 
+        document.title !== 'Just a moment...') {
+        console.log("Page loaded successfully ");
+        window.close();
+    } else {
+        console.error("Error: Missing required 'client' parameter.");
+        
+    }
+}, 5000); 
+}
 
 if (document.title !== 'tlscontact.com' && document.title !== 'Un instant…' && document.title !== 'Just a moment...') {
-
+    
 setTimeout(function(){
 fetch('https://api.ipify.org?format=json')
   .then(response => response.json())
