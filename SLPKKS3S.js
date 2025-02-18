@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         JYCOSCRIPT RENAISSANCE V1.5
 // @namespace    http://tampermonkey.net/
-// @version      2025-02-13 22:01 
+// @version      2025-02-18 22:01 
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1 2025-02-13 22:01";
+var version = "V1.1 2025-02-18 22:01";
 
 var CLP;
 var MAXO;
