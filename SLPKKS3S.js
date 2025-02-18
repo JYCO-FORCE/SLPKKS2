@@ -106,8 +106,6 @@ switch (pathSegment) {
 
 
 
-
-
 if((document.body.innerText).indexOf('This XML file does not appear to have any style information associated with it. The document tree is shown below.') > -1){ setTimeout(function(){ location.reload(); document.body.style.backgroundColor = "#FFA500"; }, 60e3); };
 if((document.body.innerText).indexOf('You have tried to log in too many times. For security reasons, you are blocked. Please re-connect later.') > -1){       setTimeout(function(){ window.location = "https://ps.w.org/limit-login-attempts-reloaded/assets/banner-1544x500.png?rev=2954981"; }, 60e3);   }
 if((document.body.innerText).indexOf('UNAUTHORIZED') > -1){ setTimeout(function(){ location.reload(); document.body.style.backgroundColor = "#FFA500"; }, 7000); };
@@ -359,39 +357,24 @@ const cookieValueTable = document.cookie.split('; ').find(row => row.startsWith(
     "x-xsrf-token": cookieValueTable,
   }
 })
-      .then(response => {
-        if (response.status === 429) {
-
-if ( localStorage.getItem("cloudflare") == "0" ) { 
- setTimeout(function(){    window.open('https://fr.tlscontact.com/services/customerservice/api/tls/appointment/ma/maCAS2fr/table?cloudflare', '_blank');   }, 5e3);
- localStorage.setItem("cloudflare", 1);
-}            
-        setTimeout(function(){    Gettable();   }, 65e3);
-        document.getElementById("MOTIF").textContent = "votre table statut : " + response.status + " blocked ";
-        console.error("statut : " + response.status);
-message = "statut 429 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP");
-       
-    // ERROR();
+.then(async response => {
+    const textResponse = await response.text();
             
-            /*
-localStorage.setItem("input429", parseInt(localStorage.getItem("input429")) + parseInt(1));
-const input429 = localStorage.getItem("input429");
-const disconnect429 = 3;
-    if (localStorage.getItem("input429") === null || parseInt(localStorage.getItem("input429")) < disconnect429) {
-        localStorage.setItem("input429", 1);
-        document.getElementById("MOTIF").textContent = "votre table statut : " + response.status;
-        console.error("statut : " + response.status);
-        setTimeout(function(){ window.location.href =  window.location  }, 60e3);
-    } else if (parseInt(localStorage.getItem("input429")) > disconnect429) {
-                localStorage.setItem("input429", 0);
-
-
+    if (response.status === 429) {
+        if (textResponse.includes("<title>Just a moment...</title>")) { 
+console.log("Cloudflare protection detected.");            
+document.getElementById("MOTIF").textContent = "Table statut : " + response.status + " Just a moment...";            
+setTimeout(function(){    window.location.href == window.location.href + "?__cf_chl_rt_tk=WQ41.uvPHkoLBVJle0EB2QYCC04DGMmcloWb80W7FGM-1739911038-1.0.1.1-iJDr.hYp55vEjRkRq64C1h0fy0ypqKYHJtbu2o0JXqo"   }, 15e3);
+        }
+else if (textResponse.includes("<!doctype html>") && textResponse.includes("<title>TLSContact Error</title>")) {
+console.log("TLSContact Error detected.");    
+document.getElementById("MOTIF").textContent = "Table statut : " + response.status + " TLSContact Error";                        
+message = "statut 429 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP");
+ERROR();            
         setTimeout(function () {
             window.location = "https://intfiction.org/uploads/default/optimized/2X/e/e04f0a22ef639e39ff3bffd9c319e02146c95406_2_1035x541.png";
         }, 5000);
-    }
-    */
-}
+} }
 
 else if (response.status === 404) {  console.error("statut : " + response.status); document.getElementById("MOTIF").textContent = "votre table statut : " + response.status;
 let url = window.location.href;
@@ -404,19 +387,22 @@ message = "statut 404 : " + localStorage.getItem("Email"+localStorage.getItem("T
             ////////// ESPACE 403 /////////////                     ////////// ESPACE 403 /////////////                ////////// ESPACE 403 /////////////
             ////////// ESPACE 403 /////////////                     ////////// ESPACE 403 /////////////                ////////// ESPACE 403 /////////////
 
-else if (response.status === 403) { localStorage.setItem("inputi403", 1);
+else    if (response.status === 403) {
+        if (textResponse.includes("<title>Just a moment...</title>")) { 
+ document.getElementById("MOTIF").textContent = "Table statut : " + response.status + " Just a moment...";
+setTimeout(function(){    window.location.href = window.location.href  +"?__cf_chl_rt_tk=WQ41.uvPHkoLBVJle0EB2QYCC04DGMmcloWb80W7FGM-1739911038-1.0.1.1-iJDr.hYp55vEjRkRq64C1h0fy0ypqKYHJtbu2o0JXqo"   }, 15e3);
+        }
+else if (textResponse.includes("<!doctype html>") && textResponse.includes("<title>TLSContact Error</title>")) {
+ document.getElementById("MOTIF").textContent = "Table statut : " + response.status + " TLSContact Error";            
+message = "statut 403 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP");
+ERROR();            
+        setTimeout(function () {
+            window.location = "https://intfiction.org/uploads/default/optimized/2X/e/e04f0a22ef639e39ff3bffd9c319e02146c95406_2_1035x541.png";
+        }, 5000);
+} }            
+            /*
+else if (response.status === 403 && textResponse.includes("<title>Just a moment...</title>") ) { localStorage.setItem("inputi403", 1);
 
-setTimeout(function () { window.location.href = window.location.href; }, 1000e3);
-
-   /*
-                                   if ( localStorage.getItem("cloudflare") == "0" ) { 
- setTimeout(function(){    window.open('https://fr.tlscontact.com/services/customerservice/api/tls/appointment/ma/maCAS2fr/table?cloudflare', '_blank');   }, 5e3);
- localStorage.setItem("cloudflare", 1);
-                                   }
-     setTimeout(function(){    Gettable();   }, 65e3);
-*/
-                                   
-                                   
     function ERROR403() {
 (async function handleUrlRequest() {
     const URL_1 = "https://fr.tlscontact.com/oauth2/authorization/oidc";
@@ -424,7 +410,8 @@ setTimeout(function () { window.location.href = window.location.href; }, 1000e3)
         const response = await fetch(URL_1, {
             method: "GET",
             headers: {
-                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*
+                /*;q=0.8",
                 /// ACCEPT MODIFY DELTE SPACE
                 "User-Agent": navigator.userAgent,
             },
@@ -469,7 +456,8 @@ const disconnect403 = 3;
         }, 5000);
     }
                                      }
-
+*/
+            
             ////////// ESPACE 403 /////////////                     ////////// ESPACE 403 /////////////                ////////// ESPACE 403 /////////////
             ////////// ESPACE 403 /////////////                     ////////// ESPACE 403 /////////////                ////////// ESPACE 403 /////////////
 
@@ -487,9 +475,9 @@ setTimeout(function () { window.location.href = window.location.href; }, 1e3);
    if (response.status === 500) {
 
 message = "table statut 500 : " + localStorage.getItem("Email"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("pwd"+localStorage.getItem("TLS_WEB_issuer")) + "\n" + localStorage.getItem("TLS_WEB_issuer") + "\n" +     localStorage.getItem("IP"); ERROR();
-        setTimeout(function () {
-            window.location = "https://digitiz.fr/wp-content/uploads/2022/07/Erreur-500.png";
-        }, 5000);
+        //setTimeout(function () { window.location = "https://digitiz.fr/wp-content/uploads/2022/07/Erreur-500.png"; }, 5000);
+       
+        setTimeout(function () { window.location = window.location }, 75000);
 
    }
             else
@@ -499,9 +487,19 @@ message = "table statut 500 : " + localStorage.getItem("Email"+localStorage.getI
                     else
         if (response.status === 504) {   console.error("votre table statut : " + response.status); document.getElementById("MOTIF").textContent = "table statut : " + response.status; setTimeout(function(){ Gettable(); },1e3); }
 
-        return response.json();
-      })
-           .then(data => {
+ // ✅ Convert response back to JSON (only if it was not an error)
+    try {
+        return JSON.parse(textResponse); // Convert manually since .text() was used
+    } catch (error) {
+        console.error("❌ JSON Parse Error:", error);
+        return null; // Stop further processing
+    }
+})
+.then(data => {
+    if (!data) {
+        console.warn("⚠️ No valid JSON response received.");
+        return;
+    }
             const availableDatesAndHours = {};
             for (const date in data) {
                 const hours = data[date];
