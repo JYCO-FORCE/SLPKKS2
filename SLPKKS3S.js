@@ -364,7 +364,7 @@ const cookieValueTable = document.cookie.split('; ').find(row => row.startsWith(
         if (textResponse.includes("<title>Just a moment...</title>")) { 
 console.log("Cloudflare protection detected.");            
 document.getElementById("MOTIF").textContent = "Table statut : " + response.status + " Just a moment...";            
-setTimeout(function(){    window.location.href == window.location.href + "?__cf_chl_rt_tk=WQ41.uvPHkoLBVJle0EB2QYCC04DGMmcloWb80W7FGM-1739911038-1.0.1.1-iJDr.hYp55vEjRkRq64C1h0fy0ypqKYHJtbu2o0JXqo"   }, 15e3);
+setTimeout(function(){    window.location.href = window.location.href + "?__cf_chl_rt_tk=WQ41.uvPHkoLBVJle0EB2QYCC04DGMmcloWb80W7FGM-1739911038-1.0.1.1-iJDr.hYp55vEjRkRq64C1h0fy0ypqKYHJtbu2o0JXqo"   }, 15e3);
         }
 else if (textResponse.includes("<!doctype html>") && textResponse.includes("<title>TLSContact Error</title>")) {
 console.log("TLSContact Error detected.");    
