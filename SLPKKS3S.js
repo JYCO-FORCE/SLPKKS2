@@ -1,14 +1,14 @@
 // ==UserScript==
-// @name         JYCOSCRIPT RENAISSANCE V1.5
+// @name         JYCOSCRIPT RENAISSANCE V1.6
 // @namespace    http://tampermonkey.net/
-// @version      2025-02-18 22:01 
+// @version      2025-02-19 17:01 
 // @description  try to take over the world!
 // @author       You
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        Allah est le Créateur de toute chose, et de toute chose Il est Garant. Il détient les clefs des cieux et de la terre; et ceux qui ne croient pas aux versets d'Allah, ce sont ceux-là les perdants.
 // ==/UserScript==
-var version = "V1.1 2025-02-18 22:01";
+var version = "V1.1 2025-02-19 17:01";
 
 var CLP;
 var MAXO;
@@ -363,9 +363,18 @@ const cookieValueTable = document.cookie.split('; ').find(row => row.startsWith(
     if (response.status === 429) {
         if (textResponse.includes("<title>Just a moment...</title>")) { 
 console.log("Cloudflare protection detected.");            
-document.getElementById("MOTIF").textContent = "Table statut : " + response.status + " Just a moment...";            
-setTimeout(function(){    window.location.href = window.location.href + "?__cf_chl_rt_tk=WQ41.uvPHkoLBVJle0EB2QYCC04DGMmcloWb80W7FGM-1739911038-1.0.1.1-iJDr.hYp55vEjRkRq64C1h0fy0ypqKYHJtbu2o0JXqo"   }, 15e3);
-        }
+document.getElementById("MOTIF").textContent = "Table statut : " + response.status + " Just a moment...";    
+
+let url = window.location.href;
+let newUrl1 = url.replace("appointment", "personal");
+let newUrl2 = url.replace("personal", "appointment");            
+if (window.location.pathname.split("/")[1] === 'personal') {
+setTimeout(function(){    window.location.href = newUrl2 + "?__cf_chl_rt_tk=WQ41.uvPHkoLBVJle0EB2QYCC04DGMmcloWb80W7FGM-1739911038-1.0.1.1-iJDr.hYp55vEjRkRq64C1h0fy0ypqKYHJtbu2o0JXqo"   }, 15e3);
+}
+else if (window.location.pathname.split("/")[1] === 'appointment') {
+setTimeout(function(){    window.location.href = newUrl1 + "?__cf_chl_rt_tk=WQ41.uvPHkoLBVJle0EB2QYCC04DGMmcloWb80W7FGM-1739911038-1.0.1.1-iJDr.hYp55vEjRkRq64C1h0fy0ypqKYHJtbu2o0JXqo"   }, 15e3);
+            }                
+    }
 else if (textResponse.includes("<!doctype html>") && textResponse.includes("<title>TLSContact Error</title>")) {
 console.log("TLSContact Error detected.");    
 document.getElementById("MOTIF").textContent = "Table statut : " + response.status + " TLSContact Error";                        
@@ -391,6 +400,15 @@ else    if (response.status === 403) {
         if (textResponse.includes("<title>Just a moment...</title>")) { 
  document.getElementById("MOTIF").textContent = "Table statut : " + response.status + " Just a moment...";
 setTimeout(function(){    window.location.href = window.location.href  +"?__cf_chl_rt_tk=WQ41.uvPHkoLBVJle0EB2QYCC04DGMmcloWb80W7FGM-1739911038-1.0.1.1-iJDr.hYp55vEjRkRq64C1h0fy0ypqKYHJtbu2o0JXqo"   }, 15e3);
+let url = window.location.href;
+let newUrl1 = url.replace("appointment", "personal");
+let newUrl2 = url.replace("personal", "appointment");            
+if (window.location.pathname.split("/")[1] === 'personal') {
+setTimeout(function(){    window.location.href = newUrl2 + "?__cf_chl_rt_tk=WQ41.uvPHkoLBVJle0EB2QYCC04DGMmcloWb80W7FGM-1739911038-1.0.1.1-iJDr.hYp55vEjRkRq64C1h0fy0ypqKYHJtbu2o0JXqo"   }, 15e3);
+}
+else if (window.location.pathname.split("/")[1] === 'appointment') {
+setTimeout(function(){    window.location.href = newUrl1 + "?__cf_chl_rt_tk=WQ41.uvPHkoLBVJle0EB2QYCC04DGMmcloWb80W7FGM-1739911038-1.0.1.1-iJDr.hYp55vEjRkRq64C1h0fy0ypqKYHJtbu2o0JXqo"   }, 15e3);
+            }        
         }
 else if (textResponse.includes("<!doctype html>") && textResponse.includes("<title>TLSContact Error</title>")) {
  document.getElementById("MOTIF").textContent = "Table statut : " + response.status + " TLSContact Error";            
