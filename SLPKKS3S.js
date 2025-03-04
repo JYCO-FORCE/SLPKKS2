@@ -66,15 +66,15 @@ let currentHour = getCurrentHour();
 // Assurer que currentHour est un nombre valide
 if (!isNaN(currentHour)) {
     if (currentHour >= 8 && currentHour < 10) {
-        MINO = 90e3; MAXO = 180e3;
+        MINO = 190e3; MAXO = 380e3;
     } else if (currentHour >= 10 && currentHour < 13) {
-        MINO = 90e3; MAXO = 180e3;
+        MINO = 190e3; MAXO = 380e3;
     } else if (currentHour >= 13 && currentHour < 18) {
-        MINO = 130e3; MAXO = 180e3;
+        MINO = 230e3; MAXO = 380e3;
     } else if (currentHour >= 18 && currentHour < 23) {
-        MINO = 220e3; MAXO = 320e3;
+        MINO = 260e3; MAXO = 420e3;
     } else if (currentHour >= 23 || currentHour < 8) { // Pour inclure la nuit (0h-7h)
-        MINO = 220e3; MAXO = 350e3;
+        MINO = 260e3; MAXO = 450e3;
     }
 } else {
     console.error("Erreur: currentHour n'est pas un nombre valide.");
