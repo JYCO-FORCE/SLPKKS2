@@ -78,8 +78,8 @@ if (!isNaN(currentHour)) {
     }
 } else {
     console.error("Erreur: currentHour n'est pas un nombre valide.");
-    MINO = 30e3; // Valeurs par défaut pour éviter un NaN
-    MAXO = 60e3;
+    MINO = 130e3; // Valeurs par défaut pour éviter un NaN
+    MAXO = 320e3;
 }
 
 // Afficher les valeurs actuelles
